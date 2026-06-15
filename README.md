@@ -2,24 +2,40 @@
 
 DHARMAVERSE is an interactive Earth-memory platform. Its core goal is to make locations feel alive: every place should have identity, memory, atmosphere, sound, and story.
 
-This repository will be built step by step from the source vision in `docs/vision.md`.
+This repository has been built step by step from the source vision in `docs/vision.md`.
 
 ## Contribution Discipline
 
 Every contribution should map to a product milestone and leave the app or implementation plan in a better state. See `docs/contribution-rules.md`.
 
-## Current Focus
+## Current Status
 
-Step 1 is the app shell:
+The current prototype is complete through the documented implementation plan and follow-up review workflow milestones. See:
 
-- A full-screen living Earth surface
-- Sample living-place profiles
+- `docs/implementation-plan.md`
+- `docs/project-completion-report.md`
+
+## Built System
+
+The app now includes:
+
+- Living Earth exploration surface
+- Sample living-place profiles for Jageshwar, Ganga, and Varanasi
 - First-person place narration
-- Memory layers and a "Why here?" panel
+- Structured consciousness layers
+- Memory stream with scene navigation and filters
+- Why Here causal reasoning engine
+- Ambient sound and atmosphere controls
+- Civilization thread graph
+- Earth Dreaming global network mode
+- Cultural archive records
+- Contribution intake console
+- Draft export JSON packet
+- Curator review checklist
 
 ## Run Locally
 
-This milestone is dependency-free. Start any static file server from the repository root:
+The app is dependency-free. Start any static file server from the repository root:
 
 ```bash
 python3 -m http.server 5173
@@ -35,13 +51,6 @@ http://localhost:5173
 
 Locations should not feel like map pins, database records, or encyclopedia entries. They should introduce themselves and explain why they matter.
 
-## Planned System Areas
+## Production Notes
 
-- Location consciousness profiles
-- First-person place narration
-- Earth memory layers
-- Why Here reasoning
-- Story, sound, sky, language, river, and forest memory modes
-- Civilization connection graph
-- Cinematic and ambient exploration modes
-- Cultural preservation archive
+The current repo is a working static prototype. Future production work can add persistence, authentication, contributor accounts, moderation queues, deployment automation, and verified source ingestion.

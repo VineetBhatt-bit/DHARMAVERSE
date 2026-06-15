@@ -270,6 +270,30 @@ Implementation notes:
 - Added checklist summary counts and embedded checklist data into the generated JSON packet.
 - Documented the rules in `docs/curator-review-checklist.md`.
 
+## Milestone 12: Completion Handoff
+
+Goal: Make the repository clearly complete and handoff-ready.
+
+Deliverables:
+
+- Updated README reflecting the actual completed system
+- Final completion report
+- Verification checklist for local review
+- Clear production notes for future expansion
+
+Acceptance:
+
+- A reviewer can open the repo and immediately understand what is complete, how to run it, and what remains future production work.
+
+Status: Complete.
+
+Implementation notes:
+
+- Updated `README.md` from early-phase wording to current prototype status.
+- Added `docs/project-completion-report.md`.
+- Recorded verification commands and completed feature inventory.
+- Clarified that the current repo is a static prototype, with backend persistence and deployment as future production work.
+
 ## Working Rules
 
 - Keep each milestone small enough to review.
