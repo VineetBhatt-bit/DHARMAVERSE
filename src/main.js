@@ -14,8 +14,20 @@ const whyHere = document.querySelector("#whyHere");
 const identityGrid = document.querySelector("#identityGrid");
 const atmosphereList = document.querySelector("#atmosphereList");
 const threadList = document.querySelector("#threadList");
+const streamTitle = document.querySelector("#streamTitle");
+const streamCounter = document.querySelector("#streamCounter");
+const streamMoment = document.querySelector("#streamMoment");
+const streamScene = document.querySelector("#streamScene");
+const streamSensory = document.querySelector("#streamSensory");
+const streamThread = document.querySelector("#streamThread");
+const previousScene = document.querySelector("#previousScene");
+const nextScene = document.querySelector("#nextScene");
+const streamDots = document.querySelector("#streamDots");
+const streamFilters = document.querySelector("#streamFilters");
 
 let activePlace = locations[0];
+let activeSceneIndex = 0;
+let activeLayerFilter = "All";
 let width = 0;
 let height = 0;
 let dpr = window.devicePixelRatio || 1;
@@ -121,6 +133,63 @@ function renderThreads() {
   });
 }
 
+function getFilteredScenes() {
+  if (activeLayerFilter === "All") return activePlace.memoryStream;
+  return activePlace.memoryStream.filter((scene) => scene.layer === activeLayerFilter);
+}
+
+function renderStream() {
+  const scenes = getFilteredScenes();
+  const scene = scenes[activeSceneIndex] || scenes[0] || activePlace.memoryStream[0];
+
+  if (!scene) return;
+
+  activeSceneIndex = scenes.indexOf(scene);
+  streamTitle.textContent = scene.title;
+  streamCounter.textContent = `${String(activeSceneIndex + 1).padStart(2, "0")} / ${String(scenes.length).padStart(2, "0")}`;
+  streamMoment.textContent = scene.moment;
+  streamScene.textContent = scene.scene;
+  streamSensory.textContent = scene.sensory;
+  streamThread.textContent = scene.thread;
+
+  renderStreamDots(scenes);
+  renderStreamFilters();
+}
+
+function renderStreamDots(scenes) {
+  streamDots.innerHTML = "";
+
+  scenes.forEach((scene, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = index === activeSceneIndex ? "is-active" : "";
+    button.setAttribute("aria-label", `Open memory scene ${index + 1}: ${scene.title}`);
+    button.addEventListener("click", () => {
+      activeSceneIndex = index;
+      renderStream();
+    });
+    streamDots.appendChild(button);
+  });
+}
+
+function renderStreamFilters() {
+  const layers = ["All", ...new Set(activePlace.memoryStream.map((scene) => scene.layer))];
+  streamFilters.innerHTML = "";
+
+  layers.forEach((layer) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = layer === activeLayerFilter ? "is-active" : "";
+    button.textContent = layer;
+    button.addEventListener("click", () => {
+      activeLayerFilter = layer;
+      activeSceneIndex = 0;
+      renderStream();
+    });
+    streamFilters.appendChild(button);
+  });
+}
+
 function renderActivePlace() {
   document.documentElement.style.setProperty("--active-tone", activePlace.tone);
   document.documentElement.style.setProperty("--active-accent", activePlace.accent);
@@ -136,11 +205,20 @@ function renderActivePlace() {
   renderLayers();
   renderAtmosphere();
   renderThreads();
+  renderStream();
 }
 
 function selectPlace(id) {
   activePlace = locations.find((place) => place.id === id) || locations[0];
+  activeSceneIndex = 0;
+  activeLayerFilter = "All";
   renderActivePlace();
+}
+
+function stepScene(direction) {
+  const scenes = getFilteredScenes();
+  activeSceneIndex = (activeSceneIndex + direction + scenes.length) % scenes.length;
+  renderStream();
 }
 
 function drawGlobe(time) {
@@ -312,6 +390,8 @@ function formatFacet(facet) {
 }
 
 window.addEventListener("resize", resizeCanvas);
+previousScene.addEventListener("click", () => stepScene(-1));
+nextScene.addEventListener("click", () => stepScene(1));
 resizeCanvas();
 renderActivePlace();
 requestAnimationFrame(drawGlobe);

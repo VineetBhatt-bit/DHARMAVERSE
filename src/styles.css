@@ -50,7 +50,8 @@ button {
 .place-dock,
 .memory-panel,
 .voice-panel,
-.orbit-readout {
+.orbit-readout,
+.stream-panel {
   border: 1px solid rgba(244, 241, 232, 0.12);
   background: var(--panel);
   backdrop-filter: blur(24px);
@@ -265,6 +266,136 @@ h2 {
   width: min(620px, 100%);
   transform: translateX(-50%);
   padding: 18px;
+  z-index: 1;
+}
+
+.stream-panel {
+  position: absolute;
+  top: 68px;
+  right: 0;
+  width: min(420px, 52%);
+  padding: 16px;
+  z-index: 2;
+}
+
+.stream-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.stream-header h2 {
+  font-size: clamp(1rem, 1.5vw, 1.35rem);
+  line-height: 1.25;
+}
+
+.stream-header span {
+  flex: 0 0 auto;
+  color: var(--active-accent);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.stream-moment {
+  display: inline-flex;
+  min-height: 26px;
+  align-items: center;
+  margin: 4px 0 10px;
+  padding: 0 9px;
+  color: var(--active-accent);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.045);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+#streamScene {
+  margin-bottom: 12px;
+  color: rgba(245, 241, 232, 0.84);
+  font-size: 0.92rem;
+  line-height: 1.58;
+}
+
+.stream-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.stream-meta span {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  color: var(--muted);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+
+.stream-controls {
+  display: grid;
+  grid-template-columns: 34px 1fr 34px;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.stream-controls > button {
+  width: 34px;
+  height: 34px;
+  color: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.055);
+  cursor: pointer;
+}
+
+.stream-controls > button:hover,
+.stream-filters button:hover,
+.stream-filters button.is-active {
+  border-color: color-mix(in srgb, var(--active-tone), white 18%);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.stream-dots {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+}
+
+.stream-dots button {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+.stream-dots button.is-active {
+  background: var(--active-accent);
+  box-shadow: 0 0 16px var(--active-accent);
+}
+
+.stream-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.stream-filters button {
+  min-height: 28px;
+  padding: 0 9px;
+  color: rgba(245, 241, 232, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  background: rgba(255, 255, 255, 0.045);
+  cursor: pointer;
+  font-size: 0.74rem;
+  font-weight: 700;
 }
 
 .voice-panel h2 {
@@ -445,6 +576,10 @@ h2 {
     grid-column: 1 / -1;
   }
 
+  .stream-panel {
+    width: min(420px, 58%);
+  }
+
   .layer-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -485,8 +620,9 @@ h2 {
   }
 
   .living-surface {
-    min-height: 500px;
+    min-height: 0;
     order: -1;
+    padding-top: 68px;
   }
 
   .orbit-readout {
@@ -494,7 +630,23 @@ h2 {
   }
 
   .voice-panel {
-    bottom: 10px;
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: 100%;
+    margin-top: 12px;
+    transform: none;
+  }
+
+  .stream-panel {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+  }
+
+  .stream-meta {
+    grid-template-columns: 1fr;
   }
 
   .layer-list {

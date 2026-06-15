@@ -100,7 +100,59 @@ export const locations = [
       "Local oral traditions"
     ],
     whyHere:
-      "Mountains created enclosure, forests created sanctity, stone architecture fixed devotion in place, and pilgrimage kept the valley emotionally alive."
+      "Mountains created enclosure, forests created sanctity, stone architecture fixed devotion in place, and pilgrimage kept the valley emotionally alive.",
+    memoryStream: [
+      {
+        id: "forest-threshold",
+        layer: "Ecological",
+        moment: "Before the temples",
+        title: "The forest prepares the mind",
+        scene:
+          "Deodar shade gathers around the valley. Before a pilgrim reaches stone, the forest has already changed the pace of breath and sound.",
+        sensory: "Resin scent, cold air, filtered light",
+        thread: "Deodar forests"
+      },
+      {
+        id: "first-stones",
+        layer: "Architectural",
+        moment: "Temple formation",
+        title: "Stone becomes memory",
+        scene:
+          "Shrines rise as clustered memory nodes. Carving, alignment, and repeated worship turn mountain material into a sacred language.",
+        sensory: "Stone texture, bell metal, footfall",
+        thread: "Temple architecture"
+      },
+      {
+        id: "pilgrim-return",
+        layer: "Human",
+        moment: "Generations of arrival",
+        title: "The unnamed keep returning",
+        scene:
+          "Pilgrims, priests, families, and guides move through the same valley. Most names disappear, but their repeated actions keep the place alive.",
+        sensory: "Low voices, offerings, lamp smoke",
+        thread: "Pilgrimage networks"
+      },
+      {
+        id: "spoken-valley",
+        layer: "Linguistic",
+        moment: "Living explanation",
+        title: "The valley speaks in many registers",
+        scene:
+          "Kumaoni speech, Sanskrit liturgy, local names, and oral explanation overlap until the place is heard as much as seen.",
+        sensory: "Chants, names, guide stories",
+        thread: "Kumaoni language"
+      },
+      {
+        id: "festival-field",
+        layer: "Cultural",
+        moment: "Ritual concentration",
+        title: "The calendar illuminates the valley",
+        scene:
+          "Festival days concentrate movement, bells, offerings, and memory. The valley becomes brighter because attention gathers here together.",
+        sensory: "Bells, flame, crowd rhythm",
+        thread: "Local oral traditions"
+      }
+    ]
   },
   {
     id: "ganga",
@@ -143,7 +195,49 @@ export const locations = [
     ],
     threads: ["Glaciers", "Floodplain agriculture", "Pilgrimage cities", "River trade", "Ritual calendars", "Oral songs"],
     whyHere:
-      "The river made settlement possible, connected regions, renewed soil, shaped ritual life, and turned movement into civilization."
+      "The river made settlement possible, connected regions, renewed soil, shaped ritual life, and turned movement into civilization.",
+    memoryStream: [
+      {
+        id: "ice-origin",
+        layer: "Geographical",
+        moment: "Mountain source",
+        title: "Ice begins the long memory",
+        scene:
+          "Snow and glacier become descent. The river starts as height, pressure, melt, and movement before it becomes a civilization path.",
+        sensory: "Cold water, rock echo, thin air",
+        thread: "Glaciers"
+      },
+      {
+        id: "silt-plain",
+        layer: "Ecological",
+        moment: "Floodplain renewal",
+        title: "The river writes with silt",
+        scene:
+          "Flood and retreat leave soil behind. Villages, crops, and routes depend on the river's ability to disturb and renew.",
+        sensory: "Wet soil, monsoon force, birds",
+        thread: "Floodplain agriculture"
+      },
+      {
+        id: "ghat-gathering",
+        layer: "Spiritual",
+        moment: "Ritual edge",
+        title: "Water becomes public devotion",
+        scene:
+          "At ghats, people gather for bathing, prayer, mourning, and return. One river edge holds many human thresholds.",
+        sensory: "Steps, bells, lamps, voices",
+        thread: "Pilgrimage cities"
+      },
+      {
+        id: "moving-market",
+        layer: "Historical",
+        moment: "Trade and travel",
+        title: "Movement becomes civilization",
+        scene:
+          "Boats, crossings, markets, and settlements turn the river into a corridor where goods, language, ritual, and news travel together.",
+        sensory: "Boat wood, market calls, oars",
+        thread: "River trade"
+      }
+    ]
   },
   {
     id: "varanasi",
@@ -186,7 +280,48 @@ export const locations = [
     ],
     threads: ["Ganga", "Classical music", "Textile craft", "Sanskrit learning", "Pilgrimage routes", "Ritual fire"],
     whyHere:
-      "A river bend, ritual geography, learning traditions, trade movement, and human longing made the city endure."
+      "A river bend, ritual geography, learning traditions, trade movement, and human longing made the city endure.",
+    memoryStream: [
+      {
+        id: "dawn-ghats",
+        layer: "Spiritual",
+        moment: "Morning edge",
+        title: "Dawn makes time visible",
+        scene:
+          "Light reaches the ghats, boats loosen from the bank, and the city begins speaking through water, flame, and stone.",
+        sensory: "River haze, bells, oars",
+        thread: "Ganga"
+      },
+      {
+        id: "lane-memory",
+        layer: "Human",
+        moment: "Everyday density",
+        title: "The lanes remember ordinary life",
+        scene:
+          "Families, students, priests, artisans, vendors, and visitors cross one another in lanes where daily work carries deep memory.",
+        sensory: "Footsteps, food smoke, street voices",
+        thread: "Pilgrimage routes"
+      },
+      {
+        id: "music-thread",
+        layer: "Cultural",
+        moment: "Sound inheritance",
+        title: "Music holds the city's inner weather",
+        scene:
+          "Practice, performance, teaching, and devotion keep emotion moving through the city long after a single voice fades.",
+        sensory: "Raga, tanpura, river air",
+        thread: "Classical music"
+      },
+      {
+        id: "fire-water",
+        layer: "Ritual",
+        moment: "Final crossing",
+        title: "Fire and water share the threshold",
+        scene:
+          "The city holds endings in public view. Ritual fire, river water, and human longing make mortality part of the urban field.",
+        sensory: "Smoke, chant, heat, water",
+        thread: "Ritual fire"
+      }
+    ]
   }
 ];
-

@@ -79,6 +79,14 @@ Acceptance:
 
 - A user can move through a location's memories in a coherent order.
 
+Status: Complete.
+
+Implementation notes:
+
+- Added `memoryStream` scenes to each sample location.
+- Added previous and next controls, scene indicators, and layer filters.
+- Rendered each scene with moment, narrative, sensory signal, and civilization thread.
+
 ## Milestone 4: Why Here Engine
 
 Goal: Explain why a place exists and why it matters.
