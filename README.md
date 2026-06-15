@@ -6,11 +6,26 @@ This repository will be built step by step from the source vision in `docs/visio
 
 ## Current Focus
 
-Step 1 is product foundation:
+Step 1 is the app shell:
 
-- Capture the sentience-engine vision in engineering terms.
-- Break the product into buildable milestones.
-- Commit each meaningful step to Git.
+- A full-screen living Earth surface
+- Sample living-place profiles
+- First-person place narration
+- Memory layers and a "Why here?" panel
+
+## Run Locally
+
+This milestone is dependency-free. Start any static file server from the repository root:
+
+```bash
+python3 -m http.server 5173
+```
+
+Then open:
+
+```text
+http://localhost:5173
+```
 
 ## Product Principle
 
@@ -26,4 +41,3 @@ Locations should not feel like map pins, database records, or encyclopedia entri
 - Civilization connection graph
 - Cinematic and ambient exploration modes
 - Cultural preservation archive
-

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DHARMAVERSE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <canvas id="earthCanvas" aria-hidden="true"></canvas>
+
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <div>
+            <p class="eyebrow">DHARMAVERSE</p>
+            <h1>Sentience Engine</h1>
+          </div>
+        </div>
+        <div class="system-status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>World heartbeat active</span>
+        </div>
+      </header>
+
+      <section class="workspace" aria-label="DHARMAVERSE exploration workspace">
+        <aside class="place-dock" aria-label="Location selector">
+          <div class="panel-heading">
+            <p class="eyebrow">Living Places</p>
+            <h2>Choose a memory field</h2>
+          </div>
+          <div class="place-list" id="placeList"></div>
+        </aside>
+
+        <section class="living-surface" aria-label="Living Earth surface">
+          <div class="orbit-readout">
+            <span id="readoutRegion">Kumaon Himalaya</span>
+            <strong id="readoutPulse">87%</strong>
+          </div>
+          <div class="memory-rings" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <article class="voice-panel">
+            <p class="eyebrow" id="voiceType">First-person signal</p>
+            <h2 id="placeName">Jageshwar</h2>
+            <p id="placeVoice"></p>
+          </article>
+        </section>
+
+        <aside class="memory-panel" aria-label="Memory layers">
+          <div class="panel-heading">
+            <p class="eyebrow">Consciousness Layers</p>
+            <h2 id="layerTitle">What I remember</h2>
+          </div>
+          <div class="layer-list" id="layerList"></div>
+          <div class="why-here">
+            <p class="eyebrow">Why here?</p>
+            <p id="whyHere"></p>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
+
