@@ -21,6 +21,7 @@ const threadList = document.querySelector("#threadList");
 const archiveList = document.querySelector("#archiveList");
 const contributionIntake = document.querySelector("#contributionIntake");
 const draftExport = document.querySelector("#draftExport");
+const reviewChecklist = document.querySelector("#reviewChecklist");
 const streamTitle = document.querySelector("#streamTitle");
 const streamCounter = document.querySelector("#streamCounter");
 const streamMoment = document.querySelector("#streamMoment");
@@ -466,6 +467,24 @@ function renderDraftExport() {
   updateDraftExport();
 }
 
+function renderReviewChecklist() {
+  reviewChecklist.innerHTML = `
+    <div class="section-label">
+      <p class="eyebrow">Curator Review</p>
+      <h2>Readiness checklist</h2>
+    </div>
+    <article class="review-card">
+      <div class="review-card__header">
+        <span id="reviewSummaryStatus"></span>
+        <strong id="reviewSummaryText"></strong>
+      </div>
+      <div class="review-item-list" id="reviewItemList"></div>
+    </article>
+  `;
+
+  updateReviewChecklist();
+}
+
 function updateContributionPreview() {
   const type = getContributionType();
   const sensitivity = getContributionSensitivity();
@@ -482,6 +501,7 @@ function updateContributionPreview() {
   contributionIntake.querySelector("#contributionRequiredContext").textContent = type.requiredContext;
   contributionIntake.querySelector("#contributionReviewRule").textContent = sensitivity.review;
   updateDraftExport();
+  updateReviewChecklist();
 }
 
 function updateDraftExport() {
@@ -520,8 +540,97 @@ function buildContributionPacket() {
       sensitivity: sensitivity.label,
       reviewRule: sensitivity.review,
       hasConsentPath: contributionDraft.hasConsentPath,
-      nextAction: contributionDraft.hasConsentPath ? "Curator review" : "Identify consent and credit path"
+      nextAction: contributionDraft.hasConsentPath ? "Curator review" : "Identify consent and credit path",
+      checklist: buildReviewChecklist()
     }
+  };
+}
+
+function updateReviewChecklist() {
+  if (!reviewChecklist.innerHTML) return;
+
+  const checklist = buildReviewChecklist();
+  reviewChecklist.querySelector("#reviewSummaryStatus").textContent = checklist.summary.status;
+  reviewChecklist.querySelector("#reviewSummaryText").textContent = checklist.summary.text;
+
+  const itemList = reviewChecklist.querySelector("#reviewItemList");
+  itemList.innerHTML = "";
+
+  checklist.items.forEach((item) => {
+    const node = document.createElement("article");
+    node.className = `review-item is-${item.status}`;
+    node.innerHTML = `
+      <span>${item.status}</span>
+      <div>
+        <strong>${item.label}</strong>
+        <p>${item.detail}</p>
+      </div>
+    `;
+    itemList.appendChild(node);
+  });
+}
+
+function buildReviewChecklist() {
+  const type = getContributionType();
+  const sensitivity = getContributionSensitivity();
+  const title = contributionDraft.title.trim();
+  const keeper = contributionDraft.keeper.trim();
+  const source = contributionDraft.source.trim();
+  const titleReady = title.length > 0 && title !== `${activePlace.name} memory contribution`;
+  const keeperReady = keeper.length > 0 && keeper !== "Keeper not identified";
+  const sourceReady = source.length > 0 && source !== "Source needed";
+  const sensitivityNeedsReview = contributionDraft.sensitivityId !== "public";
+
+  const items = [
+    {
+      id: "working-title",
+      label: "Working title",
+      status: titleReady ? "pass" : "review",
+      detail: titleReady ? "Specific title is ready for review." : "Replace the default title with a specific memory title."
+    },
+    {
+      id: "keeper-credit",
+      label: "Keeper credit",
+      status: keeperReady ? "pass" : "block",
+      detail: keeperReady ? "Keeper or source community is identified." : "Identify the keeper, source community, or responsible institution."
+    },
+    {
+      id: "source-note",
+      label: "Source note",
+      status: sourceReady ? "pass" : "block",
+      detail: sourceReady ? "Source note is present." : "Add interview, recording, field note, archive, or placeholder source context."
+    },
+    {
+      id: "consent-path",
+      label: "Consent and credit path",
+      status: contributionDraft.hasConsentPath ? "pass" : "block",
+      detail: contributionDraft.hasConsentPath ? "Consent path has been identified." : "Resolve consent and credit before publication or export."
+    },
+    {
+      id: "required-context",
+      label: "Required context",
+      status: "review",
+      detail: `${type.label} requires: ${type.requiredContext}.`
+    },
+    {
+      id: "sensitivity",
+      label: "Sensitivity rule",
+      status: sensitivityNeedsReview ? "review" : "pass",
+      detail: sensitivity.review
+    }
+  ];
+
+  const blockCount = items.filter((item) => item.status === "block").length;
+  const reviewCount = items.filter((item) => item.status === "review").length;
+  const passCount = items.filter((item) => item.status === "pass").length;
+  const status = blockCount > 0 ? "Blocked" : reviewCount > 0 ? "Needs review" : "Ready";
+
+  return {
+    summary: {
+      status,
+      text: `${passCount} pass / ${reviewCount} review / ${blockCount} block`
+    },
+    items
   };
 }
 
@@ -630,6 +739,7 @@ function renderActivePlace() {
   renderArchiveLayer();
   renderContributionIntake();
   renderDraftExport();
+  renderReviewChecklist();
   renderStream();
   renderDreamingMode();
 }

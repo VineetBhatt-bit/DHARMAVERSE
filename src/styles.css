@@ -1187,6 +1187,85 @@ h2 {
   word-break: break-word;
 }
 
+.review-checklist {
+  margin-top: 16px;
+}
+
+.review-card {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.review-card__header {
+  display: grid;
+  gap: 4px;
+}
+
+.review-card__header span {
+  color: var(--active-accent);
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.review-card__header strong {
+  font-size: 0.96rem;
+  line-height: 1.35;
+}
+
+.review-item-list {
+  display: grid;
+  gap: 8px;
+}
+
+.review-item {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 9px;
+  padding: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.review-item > span {
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #071113;
+  font-size: 0.64rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.review-item.is-pass > span {
+  background: #4ad0a3;
+}
+
+.review-item.is-review > span {
+  background: #f4c95d;
+}
+
+.review-item.is-block > span {
+  background: #ff8f5c;
+}
+
+.review-item strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.82rem;
+}
+
+.review-item p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.42;
+}
+
 @keyframes ringPulse {
   0%,
   100% {

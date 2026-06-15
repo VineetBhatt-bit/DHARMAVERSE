@@ -246,6 +246,30 @@ Implementation notes:
 - Added stable draft IDs from place and title.
 - Documented the packet contract in `docs/draft-export-packet.md`.
 
+## Milestone 11: Curator Review Checklist
+
+Goal: Convert contribution drafts into visible review decisions.
+
+Deliverables:
+
+- Readiness checklist derived from the active contribution draft
+- Pass, review, and block states for curator action
+- Checklist embedded in the draft export packet
+- Documentation for review rules
+
+Acceptance:
+
+- A curator can see which fields are ready, which need review, and which block publication.
+
+Status: Complete.
+
+Implementation notes:
+
+- Added a Curator Review panel below the draft export.
+- Added checklist rules for title, keeper credit, source note, consent path, required context, and sensitivity.
+- Added checklist summary counts and embedded checklist data into the generated JSON packet.
+- Documented the rules in `docs/curator-review-checklist.md`.
+
 ## Working Rules
 
 - Keep each milestone small enough to review.
