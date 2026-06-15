@@ -4,6 +4,10 @@ DHARMAVERSE is an interactive Earth-memory platform. Its core goal is to make lo
 
 This repository will be built step by step from the source vision in `docs/vision.md`.
 
+## Contribution Discipline
+
+Every contribution should map to a product milestone and leave the app or implementation plan in a better state. See `docs/contribution-rules.md`.
+
 ## Current Focus
 
 Step 1 is the app shell:
