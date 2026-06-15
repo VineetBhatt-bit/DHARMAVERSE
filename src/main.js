@@ -1,15 +1,19 @@
-import { locations } from "./data/locations.js";
+import { consciousnessFacets, locations } from "./data/locations.js";
 
 const canvas = document.querySelector("#earthCanvas");
 const ctx = canvas.getContext("2d");
 const placeList = document.querySelector("#placeList");
 const layerList = document.querySelector("#layerList");
 const placeName = document.querySelector("#placeName");
+const placeArchetype = document.querySelector("#placeArchetype");
 const placeVoice = document.querySelector("#placeVoice");
 const voiceType = document.querySelector("#voiceType");
 const readoutRegion = document.querySelector("#readoutRegion");
 const readoutPulse = document.querySelector("#readoutPulse");
 const whyHere = document.querySelector("#whyHere");
+const identityGrid = document.querySelector("#identityGrid");
+const atmosphereList = document.querySelector("#atmosphereList");
+const threadList = document.querySelector("#threadList");
 
 let activePlace = locations[0];
 let width = 0;
@@ -59,6 +63,7 @@ function renderLayers() {
       <span>${String(index + 1).padStart(2, "0")}</span>
       <div>
         <h3>${layer.label}</h3>
+        <small>${layer.signal}</small>
         <p>${layer.value}</p>
       </div>
     `;
@@ -66,17 +71,71 @@ function renderLayers() {
   });
 }
 
+function renderIdentityGrid() {
+  identityGrid.innerHTML = "";
+
+  consciousnessFacets.forEach((facet) => {
+    const item = document.createElement("article");
+    item.className = "identity-item";
+    item.innerHTML = `
+      <strong>${formatFacet(facet)}</strong>
+      <p>${activePlace.identity[facet]}</p>
+    `;
+    identityGrid.appendChild(item);
+  });
+}
+
+function renderAtmosphere() {
+  atmosphereList.innerHTML = `
+    <div class="section-label">
+      <p class="eyebrow">Atmosphere</p>
+      <h2>How I feel</h2>
+    </div>
+  `;
+
+  activePlace.atmosphere.forEach((signal) => {
+    const item = document.createElement("article");
+    item.className = "atmosphere-item";
+    item.innerHTML = `
+      <span>${signal.label}</span>
+      <strong>${signal.value}</strong>
+    `;
+    atmosphereList.appendChild(item);
+  });
+}
+
+function renderThreads() {
+  threadList.innerHTML = `
+    <div class="section-label">
+      <p class="eyebrow">Civilization Threads</p>
+      <h2>What I connect to</h2>
+    </div>
+    <div class="thread-chips"></div>
+  `;
+
+  const chips = threadList.querySelector(".thread-chips");
+  activePlace.threads.forEach((thread) => {
+    const chip = document.createElement("span");
+    chip.textContent = thread;
+    chips.appendChild(chip);
+  });
+}
+
 function renderActivePlace() {
   document.documentElement.style.setProperty("--active-tone", activePlace.tone);
   document.documentElement.style.setProperty("--active-accent", activePlace.accent);
   placeName.textContent = activePlace.name;
+  placeArchetype.textContent = activePlace.archetype;
   placeVoice.textContent = activePlace.voice;
   voiceType.textContent = activePlace.type;
   readoutRegion.textContent = activePlace.region;
   readoutPulse.textContent = `${activePlace.pulse}%`;
   whyHere.textContent = activePlace.whyHere;
   renderPlaces();
+  renderIdentityGrid();
   renderLayers();
+  renderAtmosphere();
+  renderThreads();
 }
 
 function selectPlace(id) {
@@ -248,8 +307,11 @@ function hexToRgba(hex, alpha) {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
+function formatFacet(facet) {
+  return facet.replace(/([A-Z])/g, " $1").replace(/^./, (char) => char.toUpperCase());
+}
+
 window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
 renderActivePlace();
 requestAnimationFrame(drawGlobe);
-

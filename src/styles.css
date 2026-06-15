@@ -280,6 +280,48 @@ h2 {
   line-height: 1.7;
 }
 
+.place-archetype {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 0 10px;
+  color: var(--active-accent);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.identity-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.identity-item {
+  min-height: 90px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.identity-item strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--active-accent);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.identity-item p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.45;
+}
+
 .layer-item {
   display: grid;
   grid-template-columns: 34px 1fr;
@@ -301,12 +343,67 @@ h2 {
   font-size: 0.92rem;
 }
 
+.layer-item small {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--active-accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
 .layer-item p,
 .why-here p:last-child {
   margin-bottom: 0;
   color: var(--muted);
   font-size: 0.88rem;
   line-height: 1.55;
+}
+
+.section-label {
+  margin: 18px 0 10px;
+}
+
+.atmosphere-list,
+.thread-list {
+  display: grid;
+  gap: 8px;
+}
+
+.atmosphere-item {
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.atmosphere-item span {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.atmosphere-item strong {
+  color: var(--ink);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.thread-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.thread-chips span {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  color: rgba(245, 241, 232, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  background: rgba(255, 255, 255, 0.045);
+  font-size: 0.78rem;
+  font-weight: 700;
 }
 
 .why-here {
@@ -350,6 +447,10 @@ h2 {
 
   .layer-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .identity-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -397,6 +498,10 @@ h2 {
   }
 
   .layer-list {
+    grid-template-columns: 1fr;
+  }
+
+  .identity-grid {
     grid-template-columns: 1fr;
   }
 }

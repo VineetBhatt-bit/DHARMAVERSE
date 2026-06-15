@@ -55,6 +55,15 @@ Acceptance:
 
 - Selecting Jageshwar shows a place identity that feels narrative, not encyclopedic.
 
+Status: Complete.
+
+Implementation notes:
+
+- Added `docs/location-consciousness-schema.md`.
+- Expanded location data into identity facets, memory layers, atmosphere signals, and civilization threads.
+- Made Jageshwar the first complete consciousness sample.
+- Updated the app to render structured identity data from the model.
+
 ## Milestone 3: Memory Stream
 
 Goal: Let a place unfold as a sequence of memories.
