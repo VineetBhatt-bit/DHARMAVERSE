@@ -123,6 +123,14 @@ Acceptance:
 
 - A user can experience a location through visual and sound cues.
 
+Status: Complete.
+
+Implementation notes:
+
+- Added `soundscape` data to each sample location.
+- Added weather, time, temperature, wind, and sound-memory channel display.
+- Added atmosphere start/stop and intensity controls using browser-generated ambient audio.
+
 ## Milestone 6: Civilization Threads
 
 Goal: Show how places connect to larger human systems.

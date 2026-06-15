@@ -16,6 +16,7 @@ const whyFactorList = document.querySelector("#whyFactorList");
 const whyDetail = document.querySelector("#whyDetail");
 const identityGrid = document.querySelector("#identityGrid");
 const atmosphereList = document.querySelector("#atmosphereList");
+const soundscapePanel = document.querySelector("#soundscapePanel");
 const threadList = document.querySelector("#threadList");
 const streamTitle = document.querySelector("#streamTitle");
 const streamCounter = document.querySelector("#streamCounter");
@@ -32,6 +33,11 @@ let activePlace = locations[0];
 let activeSceneIndex = 0;
 let activeLayerFilter = "All";
 let activeWhyFactorId = activePlace.whyHereEngine.factors[0].id;
+let activeSoundChannelId = activePlace.soundscape.channels[0].id;
+let atmospherePlaying = false;
+let atmosphereIntensity = 0.45;
+let audioContext;
+let audioNodes = [];
 let width = 0;
 let height = 0;
 let dpr = window.devicePixelRatio || 1;
@@ -117,6 +123,59 @@ function renderAtmosphere() {
       <strong>${signal.value}</strong>
     `;
     atmosphereList.appendChild(item);
+  });
+}
+
+function renderSoundscape() {
+  const soundscape = activePlace.soundscape;
+  const activeChannel = getActiveSoundChannel();
+
+  soundscapePanel.innerHTML = `
+    <div class="section-label">
+      <p class="eyebrow">Sound Memory</p>
+      <h2>Atmosphere console</h2>
+    </div>
+    <div class="weather-grid">
+      <article><span>Time</span><strong>${soundscape.time}</strong></article>
+      <article><span>Weather</span><strong>${soundscape.weather}</strong></article>
+      <article><span>Temperature</span><strong>${soundscape.temperature}</strong></article>
+      <article><span>Wind</span><strong>${soundscape.wind}</strong></article>
+    </div>
+    <div class="sound-channel-list"></div>
+    <div class="sound-detail">
+      <span>${activeChannel.texture}</span>
+      <p>${activeChannel.memory}</p>
+    </div>
+    <div class="sound-controls">
+      <button type="button" id="toggleAtmosphere">${atmospherePlaying ? "Stop atmosphere" : "Start atmosphere"}</button>
+      <label>
+        <span>Intensity</span>
+        <input id="atmosphereIntensity" type="range" min="0" max="100" value="${Math.round(atmosphereIntensity * 100)}" />
+      </label>
+    </div>
+  `;
+
+  const channelList = soundscapePanel.querySelector(".sound-channel-list");
+  soundscape.channels.forEach((channel) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = channel.id === activeSoundChannelId ? "is-active" : "";
+    button.innerHTML = `
+      <strong>${channel.label}</strong>
+      <span>${channel.texture}</span>
+    `;
+    button.addEventListener("click", () => {
+      activeSoundChannelId = channel.id;
+      if (atmospherePlaying) restartAtmosphere();
+      renderSoundscape();
+    });
+    channelList.appendChild(button);
+  });
+
+  soundscapePanel.querySelector("#toggleAtmosphere").addEventListener("click", toggleAtmosphere);
+  soundscapePanel.querySelector("#atmosphereIntensity").addEventListener("input", (event) => {
+    atmosphereIntensity = Number(event.target.value) / 100;
+    updateAtmosphereGain();
   });
 }
 
@@ -256,6 +315,7 @@ function renderActivePlace() {
   renderIdentityGrid();
   renderLayers();
   renderAtmosphere();
+  renderSoundscape();
   renderThreads();
   renderWhyHereEngine();
   renderStream();
@@ -266,6 +326,8 @@ function selectPlace(id) {
   activeSceneIndex = 0;
   activeLayerFilter = "All";
   activeWhyFactorId = activePlace.whyHereEngine.factors[0].id;
+  activeSoundChannelId = activePlace.soundscape.channels[0].id;
+  if (atmospherePlaying) restartAtmosphere();
   renderActivePlace();
 }
 
@@ -273,6 +335,81 @@ function stepScene(direction) {
   const scenes = getFilteredScenes();
   activeSceneIndex = (activeSceneIndex + direction + scenes.length) % scenes.length;
   renderStream();
+}
+
+function getActiveSoundChannel() {
+  return activePlace.soundscape.channels.find((channel) => channel.id === activeSoundChannelId) || activePlace.soundscape.channels[0];
+}
+
+function toggleAtmosphere() {
+  if (atmospherePlaying) {
+    stopAtmosphere();
+  } else {
+    startAtmosphere();
+  }
+  renderSoundscape();
+}
+
+function startAtmosphere() {
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContextClass) return;
+
+  audioContext = audioContext || new AudioContextClass();
+  if (audioContext.state === "suspended") audioContext.resume();
+  atmospherePlaying = true;
+  createAtmosphereNodes();
+}
+
+function restartAtmosphere() {
+  stopAtmosphereNodes();
+  createAtmosphereNodes();
+}
+
+function stopAtmosphere() {
+  atmospherePlaying = false;
+  stopAtmosphereNodes();
+}
+
+function stopAtmosphereNodes() {
+  audioNodes.forEach((node) => {
+    try {
+      node.stop();
+    } catch {
+      node.disconnect();
+    }
+  });
+  audioNodes = [];
+}
+
+function createAtmosphereNodes() {
+  if (!audioContext || !atmospherePlaying) return;
+
+  const channel = getActiveSoundChannel();
+  const masterGain = audioContext.createGain();
+  const mainOscillator = audioContext.createOscillator();
+  const modulator = audioContext.createOscillator();
+  const modulatorGain = audioContext.createGain();
+
+  mainOscillator.type = "sine";
+  mainOscillator.frequency.value = channel.frequency;
+  modulator.type = "sine";
+  modulator.frequency.value = channel.modulation;
+  modulatorGain.gain.value = channel.frequency * 0.015;
+  masterGain.gain.value = atmosphereIntensity * 0.08;
+
+  modulator.connect(modulatorGain);
+  modulatorGain.connect(mainOscillator.frequency);
+  mainOscillator.connect(masterGain);
+  masterGain.connect(audioContext.destination);
+
+  mainOscillator.start();
+  modulator.start();
+  audioNodes = [mainOscillator, modulator, masterGain, modulatorGain];
+}
+
+function updateAtmosphereGain() {
+  const gainNode = audioNodes.find((node) => node.gain);
+  if (gainNode) gainNode.gain.value = atmosphereIntensity * 0.08;
 }
 
 function drawGlobe(time) {

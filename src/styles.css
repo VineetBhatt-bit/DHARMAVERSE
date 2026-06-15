@@ -495,6 +495,7 @@ h2 {
 }
 
 .atmosphere-list,
+.soundscape-panel,
 .thread-list {
   display: grid;
   gap: 8px;
@@ -517,6 +518,100 @@ h2 {
   color: var(--ink);
   font-size: 0.86rem;
   line-height: 1.45;
+}
+
+.weather-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.weather-grid article,
+.sound-detail {
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.weather-grid span,
+.sound-detail span,
+.sound-controls label span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--active-accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.weather-grid strong {
+  color: rgba(245, 241, 232, 0.86);
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.sound-channel-list {
+  display: grid;
+  gap: 8px;
+}
+
+.sound-channel-list button {
+  min-height: 54px;
+  display: grid;
+  gap: 3px;
+  padding: 9px;
+  color: var(--ink);
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+}
+
+.sound-channel-list button:hover,
+.sound-channel-list button.is-active {
+  border-color: color-mix(in srgb, var(--active-tone), white 18%);
+  background: rgba(255, 255, 255, 0.085);
+}
+
+.sound-channel-list strong {
+  font-size: 0.88rem;
+}
+
+.sound-channel-list span {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.sound-detail p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.48;
+}
+
+.sound-controls {
+  display: grid;
+  gap: 10px;
+}
+
+.sound-controls button {
+  min-height: 38px;
+  color: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.055);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.sound-controls button:hover {
+  border-color: color-mix(in srgb, var(--active-tone), white 18%);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sound-controls input {
+  width: 100%;
+  accent-color: var(--active-accent);
 }
 
 .thread-chips {
@@ -777,6 +872,10 @@ h2 {
   }
 
   .identity-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .weather-grid {
     grid-template-columns: 1fr;
   }
 }

@@ -90,6 +90,38 @@ export const locations = [
       { label: "Human presence", value: "Pilgrims, priests, local families, caretakers, guides" },
       { label: "Emotional tone", value: "Reverent, forested, ancient, intimate" }
     ],
+    soundscape: {
+      time: "04:52 dawn",
+      weather: "Cold mist under deodar canopy",
+      temperature: "9 C",
+      wind: "Soft valley drift",
+      channels: [
+        {
+          id: "temple-bells",
+          label: "Temple bells",
+          memory: "Bell metal rolls through forest air and marks ritual presence.",
+          texture: "Bright pulse",
+          frequency: 392,
+          modulation: 1.6
+        },
+        {
+          id: "deodar-wind",
+          label: "Deodar wind",
+          memory: "Wind through tall trees makes the forest feel like a speaking threshold.",
+          texture: "Low breath",
+          frequency: 146,
+          modulation: 0.7
+        },
+        {
+          id: "pilgrim-steps",
+          label: "Pilgrim steps",
+          memory: "Footsteps and low voices carry ordinary devotion toward the shrine cluster.",
+          texture: "Human rhythm",
+          frequency: 220,
+          modulation: 1.1
+        }
+      ]
+    },
     threads: [
       "Deodar forests",
       "Kumaoni language",
@@ -236,6 +268,38 @@ export const locations = [
       { label: "Human presence", value: "Pilgrims, boatmen, farmers, mourners, vendors" },
       { label: "Emotional tone", value: "Vast, sacred, public, relentless" }
     ],
+    soundscape: {
+      time: "17:20 river dusk",
+      weather: "Warm haze over moving water",
+      temperature: "28 C",
+      wind: "Open current breeze",
+      channels: [
+        {
+          id: "river-current",
+          label: "River current",
+          memory: "Continuous water movement holds geography, ecology, and pilgrimage together.",
+          texture: "Flowing drone",
+          frequency: 174,
+          modulation: 0.5
+        },
+        {
+          id: "ghat-bells",
+          label: "Ghat bells",
+          memory: "Ritual bells and chants gather people at the river edge.",
+          texture: "Ceremonial pulse",
+          frequency: 330,
+          modulation: 1.4
+        },
+        {
+          id: "boat-market",
+          label: "Boat market",
+          memory: "Oars, calls, and crossings turn the river into a moving civic corridor.",
+          texture: "Public motion",
+          frequency: 247,
+          modulation: 1
+        }
+      ]
+    },
     threads: ["Glaciers", "Floodplain agriculture", "Pilgrimage cities", "River trade", "Ritual calendars", "Oral songs"],
     whyHere:
       "The river made settlement possible, connected regions, renewed soil, shaped ritual life, and turned movement into civilization.",
@@ -364,6 +428,38 @@ export const locations = [
       { label: "Human presence", value: "Priests, boatmen, students, artisans, pilgrims, families" },
       { label: "Emotional tone", value: "Intense, luminous, ancient, crowded" }
     ],
+    soundscape: {
+      time: "05:38 ghat dawn",
+      weather: "River haze lifting from stone steps",
+      temperature: "21 C",
+      wind: "Light riverbank air",
+      channels: [
+        {
+          id: "aarti-bells",
+          label: "Aarti bells",
+          memory: "Morning ritual turns the riverfront into shared sound and light.",
+          texture: "Luminous ring",
+          frequency: 440,
+          modulation: 1.8
+        },
+        {
+          id: "boat-oars",
+          label: "Boat oars",
+          memory: "Oars and water make the river edge feel awake before the lanes fill.",
+          texture: "Water rhythm",
+          frequency: 196,
+          modulation: 0.8
+        },
+        {
+          id: "lane-voices",
+          label: "Lane voices",
+          memory: "Vendors, priests, students, and families layer the city with ordinary memory.",
+          texture: "Crowded murmur",
+          frequency: 262,
+          modulation: 1.2
+        }
+      ]
+    },
     threads: ["Ganga", "Classical music", "Textile craft", "Sanskrit learning", "Pilgrimage routes", "Ritual fire"],
     whyHere:
       "A river bend, ritual geography, learning traditions, trade movement, and human longing made the city endure.",
