@@ -544,6 +544,129 @@ h2 {
   background: rgba(255, 255, 255, 0.045);
 }
 
+.why-here h2 {
+  margin-bottom: 8px;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+#whyHere {
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.why-factor-list {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.why-factor-list button {
+  min-height: 58px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  grid-template-areas:
+    "index force"
+    "index layer";
+  gap: 2px 8px;
+  align-items: center;
+  padding: 9px;
+  color: var(--ink);
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+}
+
+.why-factor-list button:hover,
+.why-factor-list button.is-active {
+  border-color: color-mix(in srgb, var(--active-tone), white 18%);
+  background: rgba(255, 255, 255, 0.085);
+}
+
+.why-factor-list span {
+  grid-area: index;
+  color: var(--active-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.why-factor-list strong {
+  grid-area: force;
+  font-size: 0.88rem;
+}
+
+.why-factor-list small {
+  grid-area: layer;
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.why-detail {
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+.why-detail__header {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.why-detail__header span {
+  color: var(--active-accent);
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.why-detail__header strong {
+  font-size: 1rem;
+}
+
+.why-detail dl {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.why-detail dt {
+  margin-bottom: 4px;
+  color: var(--active-accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.why-detail dd {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.48;
+}
+
+.why-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.why-links span {
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 9px;
+  color: rgba(245, 241, 232, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.045);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
 @keyframes ringPulse {
   0%,
   100% {

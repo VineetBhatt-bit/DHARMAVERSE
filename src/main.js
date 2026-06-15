@@ -10,7 +10,10 @@ const placeVoice = document.querySelector("#placeVoice");
 const voiceType = document.querySelector("#voiceType");
 const readoutRegion = document.querySelector("#readoutRegion");
 const readoutPulse = document.querySelector("#readoutPulse");
+const whyQuestion = document.querySelector("#whyQuestion");
 const whyHere = document.querySelector("#whyHere");
+const whyFactorList = document.querySelector("#whyFactorList");
+const whyDetail = document.querySelector("#whyDetail");
 const identityGrid = document.querySelector("#identityGrid");
 const atmosphereList = document.querySelector("#atmosphereList");
 const threadList = document.querySelector("#threadList");
@@ -28,6 +31,7 @@ const streamFilters = document.querySelector("#streamFilters");
 let activePlace = locations[0];
 let activeSceneIndex = 0;
 let activeLayerFilter = "All";
+let activeWhyFactorId = activePlace.whyHereEngine.factors[0].id;
 let width = 0;
 let height = 0;
 let dpr = window.devicePixelRatio || 1;
@@ -133,6 +137,55 @@ function renderThreads() {
   });
 }
 
+function renderWhyHereEngine() {
+  const engine = activePlace.whyHereEngine;
+  const activeFactor = engine.factors.find((factor) => factor.id === activeWhyFactorId) || engine.factors[0];
+
+  whyQuestion.textContent = engine.question;
+  whyHere.textContent = engine.answer;
+  whyFactorList.innerHTML = "";
+
+  engine.factors.forEach((factor, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = factor.id === activeFactor.id ? "is-active" : "";
+    button.innerHTML = `
+      <span>${String(index + 1).padStart(2, "0")}</span>
+      <strong>${factor.force}</strong>
+      <small>${factor.layer}</small>
+    `;
+    button.addEventListener("click", () => {
+      activeWhyFactorId = factor.id;
+      renderWhyHereEngine();
+    });
+    whyFactorList.appendChild(button);
+  });
+
+  whyDetail.innerHTML = `
+    <div class="why-detail__header">
+      <span>${activeFactor.layer}</span>
+      <strong>${activeFactor.force}</strong>
+    </div>
+    <dl>
+      <div>
+        <dt>Cause</dt>
+        <dd>${activeFactor.cause}</dd>
+      </div>
+      <div>
+        <dt>Effect</dt>
+        <dd>${activeFactor.effect}</dd>
+      </div>
+      <div>
+        <dt>Evidence</dt>
+        <dd>${activeFactor.evidence}</dd>
+      </div>
+    </dl>
+    <div class="why-links">
+      ${activeFactor.connectsTo.map((connection) => `<span>${connection}</span>`).join("")}
+    </div>
+  `;
+}
+
 function getFilteredScenes() {
   if (activeLayerFilter === "All") return activePlace.memoryStream;
   return activePlace.memoryStream.filter((scene) => scene.layer === activeLayerFilter);
@@ -199,12 +252,12 @@ function renderActivePlace() {
   voiceType.textContent = activePlace.type;
   readoutRegion.textContent = activePlace.region;
   readoutPulse.textContent = `${activePlace.pulse}%`;
-  whyHere.textContent = activePlace.whyHere;
   renderPlaces();
   renderIdentityGrid();
   renderLayers();
   renderAtmosphere();
   renderThreads();
+  renderWhyHereEngine();
   renderStream();
 }
 
@@ -212,6 +265,7 @@ function selectPlace(id) {
   activePlace = locations.find((place) => place.id === id) || locations[0];
   activeSceneIndex = 0;
   activeLayerFilter = "All";
+  activeWhyFactorId = activePlace.whyHereEngine.factors[0].id;
   renderActivePlace();
 }
 

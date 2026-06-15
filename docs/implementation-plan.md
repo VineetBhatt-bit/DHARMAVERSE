@@ -101,6 +101,14 @@ Acceptance:
 
 - The app explains why the sample place developed where it did.
 
+Status: Complete.
+
+Implementation notes:
+
+- Added `whyHereEngine` causal models for each sample location.
+- Rendered selectable causal factors with cause, effect, evidence, and connected layers.
+- Replaced static "Why here?" copy with a structured reasoning panel.
+
 ## Milestone 5: Sound and Atmosphere
 
 Goal: Make locations feel alive through ambient presentation.

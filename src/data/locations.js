@@ -101,6 +101,49 @@ export const locations = [
     ],
     whyHere:
       "Mountains created enclosure, forests created sanctity, stone architecture fixed devotion in place, and pilgrimage kept the valley emotionally alive.",
+    whyHereEngine: {
+      question: "Why did Jageshwar become a sacred forest temple valley?",
+      answer:
+        "Because geography slowed arrival, deodar ecology created sacred atmosphere, stone temples fixed devotion in place, and pilgrimage kept the valley active across generations.",
+      factors: [
+        {
+          id: "mountain-enclosure",
+          force: "Mountain enclosure",
+          layer: "Geography",
+          cause: "A protected Himalayan valley makes arrival gradual and intentional.",
+          effect: "The place feels separated from ordinary movement before ritual even begins.",
+          evidence: "Ridges, altitude, forest corridors, and approach paths shape the visitor's pace.",
+          connectsTo: ["Ecology", "Pilgrimage"]
+        },
+        {
+          id: "deodar-sanctity",
+          force: "Deodar sanctity",
+          layer: "Ecology",
+          cause: "The deodar forest changes sound, light, temperature, and emotional attention.",
+          effect: "The forest becomes a living threshold instead of scenery around the temples.",
+          evidence: "Shade, scent, silence, and sacred tree associations surround the shrine cluster.",
+          connectsTo: ["Religion", "Atmosphere"]
+        },
+        {
+          id: "stone-fixity",
+          force: "Stone memory",
+          layer: "Architecture",
+          cause: "Temple construction turns devotion into durable form.",
+          effect: "The sacred presence becomes repeatable, visible, and anchored in the landscape.",
+          evidence: "Clustered shrines, carved stone, and repeated worship make the valley legible as sacred.",
+          connectsTo: ["History", "Culture"]
+        },
+        {
+          id: "pilgrim-continuity",
+          force: "Pilgrim continuity",
+          layer: "Human Memory",
+          cause: "Generations keep returning through ritual, festivals, family knowledge, and local guidance.",
+          effect: "The site remains alive because memory is performed, not only preserved.",
+          evidence: "Priests, local families, guides, and pilgrims transmit routes, stories, offerings, and reverence.",
+          connectsTo: ["Oral traditions", "Festivals"]
+        }
+      ]
+    },
     memoryStream: [
       {
         id: "forest-threshold",
@@ -196,6 +239,49 @@ export const locations = [
     threads: ["Glaciers", "Floodplain agriculture", "Pilgrimage cities", "River trade", "Ritual calendars", "Oral songs"],
     whyHere:
       "The river made settlement possible, connected regions, renewed soil, shaped ritual life, and turned movement into civilization.",
+    whyHereEngine: {
+      question: "Why did Ganga become a civilization river?",
+      answer:
+        "Because glacial descent, floodplain renewal, ritual meaning, and river movement made the same water system ecological, economic, and sacred.",
+      factors: [
+        {
+          id: "glacial-descent",
+          force: "Glacial descent",
+          layer: "Geography",
+          cause: "The river moves from Himalayan source into plains and deltas.",
+          effect: "It connects altitude, settlement, agriculture, city life, and oceanic movement.",
+          evidence: "Snowmelt, slope, tributaries, plains, and delta routes create long continuity.",
+          connectsTo: ["Climate", "Trade"]
+        },
+        {
+          id: "floodplain-renewal",
+          force: "Floodplain renewal",
+          layer: "Ecology",
+          cause: "Flood, silt, and seasonal change renew the land while disturbing settlement.",
+          effect: "Agriculture and village life become tied to the river's changing body.",
+          evidence: "Wetlands, soil renewal, crops, fish, and flood rhythms support settlement.",
+          connectsTo: ["Agriculture", "Human Memory"]
+        },
+        {
+          id: "ritual-water",
+          force: "Ritual water",
+          layer: "Religion",
+          cause: "Sacred meaning turns the river into purification, pilgrimage, mourning, and return.",
+          effect: "The river becomes a public spiritual axis for millions of repeated actions.",
+          evidence: "Ghats, offerings, mass bathing days, lamps, and family rites gather at the edge.",
+          connectsTo: ["Festivals", "Mythology"]
+        },
+        {
+          id: "river-corridor",
+          force: "River corridor",
+          layer: "Trade Routes",
+          cause: "Water movement, crossings, boats, and markets connect distant communities.",
+          effect: "Goods, languages, songs, news, and rituals travel together along the river.",
+          evidence: "Boat traffic, market towns, pilgrimage cities, and crossing points form a network.",
+          connectsTo: ["Language", "Culture"]
+        }
+      ]
+    },
     memoryStream: [
       {
         id: "ice-origin",
@@ -281,6 +367,49 @@ export const locations = [
     threads: ["Ganga", "Classical music", "Textile craft", "Sanskrit learning", "Pilgrimage routes", "Ritual fire"],
     whyHere:
       "A river bend, ritual geography, learning traditions, trade movement, and human longing made the city endure.",
+    whyHereEngine: {
+      question: "Why did Varanasi endure as a ritual city?",
+      answer:
+        "Because the river edge concentrated ritual, dense lanes preserved everyday memory, learning traditions anchored knowledge, and human longing kept returning to the city.",
+      factors: [
+        {
+          id: "river-edge",
+          force: "River edge",
+          layer: "Geography",
+          cause: "A charged riverfront gives ritual, movement, and public gathering a visible edge.",
+          effect: "The city can turn dawn, bathing, mourning, and worship into shared civic form.",
+          evidence: "Ghats, boats, steps, lamps, and riverfront temples organize daily life.",
+          connectsTo: ["Religion", "Architecture"]
+        },
+        {
+          id: "lane-density",
+          force: "Lane density",
+          layer: "Human Memory",
+          cause: "Tight lanes hold families, artisans, students, priests, vendors, and visitors in close contact.",
+          effect: "Ordinary life becomes a memory network rather than a backdrop to monuments.",
+          evidence: "Markets, homes, workshops, shrines, food, teaching, and street speech overlap.",
+          connectsTo: ["Culture", "Language"]
+        },
+        {
+          id: "learning-anchor",
+          force: "Learning anchor",
+          layer: "Culture",
+          cause: "Religious study, music, craft, and teaching traditions create continuity beyond single rulers.",
+          effect: "The city survives disruption because practice is distributed across people and institutions.",
+          evidence: "Sanskrit learning, music lineages, textile craft, and ritual specialists sustain identity.",
+          connectsTo: ["Language", "Architecture"]
+        },
+        {
+          id: "human-longing",
+          force: "Human longing",
+          layer: "Spiritual Memory",
+          cause: "People come seeking blessing, release, meaning, education, livelihood, and final crossing.",
+          effect: "The city renews itself through arrival, not just inheritance.",
+          evidence: "Pilgrims, mourners, students, families, boatmen, and priests keep the city in motion.",
+          connectsTo: ["Pilgrimage", "Ritual fire"]
+        }
+      ]
+    },
     memoryStream: [
       {
         id: "dawn-ghats",
