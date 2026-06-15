@@ -1,4 +1,4 @@
-import { archiveRecords, consciousnessFacets, earthDreaming, locations } from "./data/locations.js";
+import { archiveRecords, consciousnessFacets, contributionGuidelines, earthDreaming, locations } from "./data/locations.js";
 
 const canvas = document.querySelector("#earthCanvas");
 const ctx = canvas.getContext("2d");
@@ -19,6 +19,7 @@ const atmosphereList = document.querySelector("#atmosphereList");
 const soundscapePanel = document.querySelector("#soundscapePanel");
 const threadList = document.querySelector("#threadList");
 const archiveList = document.querySelector("#archiveList");
+const contributionIntake = document.querySelector("#contributionIntake");
 const streamTitle = document.querySelector("#streamTitle");
 const streamCounter = document.querySelector("#streamCounter");
 const streamMoment = document.querySelector("#streamMoment");
@@ -44,6 +45,7 @@ let activeSoundChannelId = activePlace.soundscape.channels[0].id;
 let activeThreadNodeId = activePlace.threadGraph.nodes[0].id;
 let activeDreamLayerId = earthDreaming.layers[0].id;
 let dreamModeActive = false;
+let contributionDraft = createContributionDraft(activePlace);
 let atmospherePlaying = false;
 let atmosphereIntensity = 0.45;
 let audioContext;
@@ -335,6 +337,132 @@ function renderArchiveLayer() {
   });
 }
 
+function renderContributionIntake() {
+  contributionIntake.innerHTML = `
+    <div class="section-label">
+      <p class="eyebrow">Contribution Intake</p>
+      <h2>Prepare an archive submission</h2>
+    </div>
+    <div class="intake-form">
+      <label>
+        <span>Record type</span>
+        <select id="contributionType">
+          ${contributionGuidelines.recordTypes
+            .map((type) => `<option value="${type.id}">${type.label}</option>`)
+            .join("")}
+        </select>
+      </label>
+      <label>
+        <span>Sensitivity</span>
+        <select id="contributionSensitivity">
+          ${contributionGuidelines.sensitivityLevels
+            .map((level) => `<option value="${level.id}">${level.label}</option>`)
+            .join("")}
+        </select>
+      </label>
+      <label>
+        <span>Working title</span>
+        <input id="contributionTitle" type="text" value="${contributionDraft.title}" />
+      </label>
+      <label>
+        <span>Keeper or source community</span>
+        <input id="contributionKeeper" type="text" value="${contributionDraft.keeper}" />
+      </label>
+      <label>
+        <span>Source note</span>
+        <input id="contributionSource" type="text" value="${contributionDraft.source}" />
+      </label>
+      <label class="intake-consent">
+        <input id="contributionConsent" type="checkbox" />
+        <span>Consent and credit path identified</span>
+      </label>
+    </div>
+    <article class="intake-preview">
+      <div class="intake-preview__header">
+        <span id="contributionStatus"></span>
+        <strong id="contributionPreviewTitle"></strong>
+      </div>
+      <dl>
+        <div>
+          <dt>Place</dt>
+          <dd id="contributionPlace"></dd>
+        </div>
+        <div>
+          <dt>Keeper</dt>
+          <dd id="contributionPreviewKeeper"></dd>
+        </div>
+        <div>
+          <dt>Source</dt>
+          <dd id="contributionPreviewSource"></dd>
+        </div>
+        <div>
+          <dt>Required context</dt>
+          <dd id="contributionRequiredContext"></dd>
+        </div>
+        <div>
+          <dt>Review rule</dt>
+          <dd id="contributionReviewRule"></dd>
+        </div>
+      </dl>
+    </article>
+  `;
+
+  const typeControl = contributionIntake.querySelector("#contributionType");
+  const sensitivityControl = contributionIntake.querySelector("#contributionSensitivity");
+  const titleControl = contributionIntake.querySelector("#contributionTitle");
+  const keeperControl = contributionIntake.querySelector("#contributionKeeper");
+  const sourceControl = contributionIntake.querySelector("#contributionSource");
+  const consentControl = contributionIntake.querySelector("#contributionConsent");
+
+  typeControl.value = contributionDraft.typeId;
+  sensitivityControl.value = contributionDraft.sensitivityId;
+  consentControl.checked = contributionDraft.hasConsentPath;
+
+  typeControl.addEventListener("change", (event) => {
+    contributionDraft.typeId = event.target.value;
+    updateContributionPreview();
+  });
+  sensitivityControl.addEventListener("change", (event) => {
+    contributionDraft.sensitivityId = event.target.value;
+    updateContributionPreview();
+  });
+  titleControl.addEventListener("input", (event) => {
+    contributionDraft.title = event.target.value;
+    updateContributionPreview();
+  });
+  keeperControl.addEventListener("input", (event) => {
+    contributionDraft.keeper = event.target.value;
+    updateContributionPreview();
+  });
+  sourceControl.addEventListener("input", (event) => {
+    contributionDraft.source = event.target.value;
+    updateContributionPreview();
+  });
+  consentControl.addEventListener("change", (event) => {
+    contributionDraft.hasConsentPath = event.target.checked;
+    updateContributionPreview();
+  });
+
+  updateContributionPreview();
+}
+
+function updateContributionPreview() {
+  const type = getContributionType();
+  const sensitivity = getContributionSensitivity();
+  const title = contributionDraft.title.trim() || "Untitled memory";
+  const keeper = contributionDraft.keeper.trim() || "Keeper not identified";
+  const source = contributionDraft.source.trim() || "Source needed";
+  const consentStatus = contributionDraft.hasConsentPath ? "Ready for curator review" : "Consent path needed";
+
+  contributionIntake.querySelector("#contributionStatus").textContent = `${type.label} / ${consentStatus}`;
+  contributionIntake.querySelector("#contributionPreviewTitle").textContent = title;
+  contributionIntake.querySelector("#contributionPlace").textContent = activePlace.name;
+  contributionIntake.querySelector("#contributionPreviewKeeper").textContent = keeper;
+  contributionIntake.querySelector("#contributionPreviewSource").textContent = source;
+  contributionIntake.querySelector("#contributionRequiredContext").textContent = type.requiredContext;
+  contributionIntake.querySelector("#contributionReviewRule").textContent = sensitivity.review;
+}
+
 function getFilteredScenes() {
   if (activeLayerFilter === "All") return activePlace.memoryStream;
   return activePlace.memoryStream.filter((scene) => scene.layer === activeLayerFilter);
@@ -438,6 +566,7 @@ function renderActivePlace() {
   renderThreads();
   renderWhyHereEngine();
   renderArchiveLayer();
+  renderContributionIntake();
   renderStream();
   renderDreamingMode();
 }
@@ -449,6 +578,7 @@ function selectPlace(id) {
   activeWhyFactorId = activePlace.whyHereEngine.factors[0].id;
   activeSoundChannelId = activePlace.soundscape.channels[0].id;
   activeThreadNodeId = activePlace.threadGraph.nodes[0].id;
+  contributionDraft = createContributionDraft(activePlace);
   if (atmospherePlaying) restartAtmosphere();
   renderActivePlace();
 }
@@ -465,6 +595,28 @@ function getActiveSoundChannel() {
 
 function getActiveDreamLayer() {
   return earthDreaming.layers.find((layer) => layer.id === activeDreamLayerId) || earthDreaming.layers[0];
+}
+
+function getContributionType() {
+  return contributionGuidelines.recordTypes.find((type) => type.id === contributionDraft.typeId) || contributionGuidelines.recordTypes[0];
+}
+
+function getContributionSensitivity() {
+  return (
+    contributionGuidelines.sensitivityLevels.find((level) => level.id === contributionDraft.sensitivityId) ||
+    contributionGuidelines.sensitivityLevels[0]
+  );
+}
+
+function createContributionDraft(place) {
+  return {
+    typeId: contributionGuidelines.recordTypes[0].id,
+    sensitivityId: contributionGuidelines.sensitivityLevels[1].id,
+    title: `${place.name} memory contribution`,
+    keeper: "Keeper not identified",
+    source: "Source needed",
+    hasConsentPath: false
+  };
 }
 
 function toggleDreamingMode() {

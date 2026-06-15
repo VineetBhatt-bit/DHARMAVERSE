@@ -180,6 +180,53 @@ export const archiveRecords = [
   }
 ];
 
+export const contributionGuidelines = {
+  recordTypes: [
+    {
+      id: "oral-tradition",
+      label: "Oral tradition",
+      requiredContext: "speaker, language, place, date, relationship to memory"
+    },
+    {
+      id: "song-or-chant",
+      label: "Song or chant",
+      requiredContext: "performer, lyrics language, occasion, recording consent"
+    },
+    {
+      id: "local-knowledge",
+      label: "Local knowledge",
+      requiredContext: "knowledge holder, use boundary, seasonal context, sensitivity"
+    },
+    {
+      id: "ritual-note",
+      label: "Ritual note",
+      requiredContext: "ritual role, location, privacy level, reuse restrictions"
+    },
+    {
+      id: "sound-memory",
+      label: "Sound memory",
+      requiredContext: "recording place, time, source, participant consent"
+    }
+  ],
+  sensitivityLevels: [
+    {
+      id: "public",
+      label: "Public",
+      review: "Can be shown after source and keeper credit are confirmed."
+    },
+    {
+      id: "community-review",
+      label: "Community review",
+      review: "Needs review by keeper, family, institution, or local community before publication."
+    },
+    {
+      id: "restricted",
+      label: "Restricted",
+      review: "Keep private until explicit permission, privacy, and cultural boundaries are resolved."
+    }
+  ]
+};
+
 export const locations = [
   {
     id: "jageshwar",

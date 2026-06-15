@@ -199,6 +199,29 @@ Implementation notes:
 - Rendered archive records inside the active place memory panel.
 - Documented the schema and contribution workflow in `docs/archive-layer.md`.
 
+## Milestone 9: Contribution Intake Console
+
+Goal: Turn archive preservation into a guided contribution workflow.
+
+Deliverables:
+
+- Intake schema for record type and sensitivity review
+- Active-place contribution draft UI
+- Consent, keeper, source, and review preview fields
+
+Acceptance:
+
+- A curator can prepare a draft archive submission with enough context to decide whether it is ready for review.
+
+Status: Complete.
+
+Implementation notes:
+
+- Added `contributionGuidelines` for record types, required context, and sensitivity levels.
+- Added a contribution intake console below the archive records.
+- Added live draft preview for place, keeper, source, context requirements, consent status, and review rule.
+- Documented the workflow in `docs/contribution-intake.md`.
+
 ## Working Rules
 
 - Keep each milestone small enough to review.
