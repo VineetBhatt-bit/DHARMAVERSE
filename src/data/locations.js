@@ -13,6 +13,80 @@ export const consciousnessFacets = [
   "oralTraditions"
 ];
 
+export const earthDreaming = {
+  nodes: {
+    jageshwar: { label: "Jageshwar", x: 0.62, y: 0.39 },
+    ganga: { label: "Ganga", x: 0.58, y: 0.48 },
+    varanasi: { label: "Varanasi", x: 0.6, y: 0.51 },
+    deodar: { label: "Deodar forests", x: 0.55, y: 0.36 },
+    shaivism: { label: "Shaivism", x: 0.65, y: 0.43 },
+    kumaoni: { label: "Kumaoni language", x: 0.52, y: 0.41 },
+    music: { label: "Classical music", x: 0.68, y: 0.53 },
+    pilgrimage: { label: "Pilgrimage routes", x: 0.63, y: 0.47 },
+    floodplain: { label: "Floodplain memory", x: 0.56, y: 0.55 },
+    craft: { label: "Craft exchange", x: 0.67, y: 0.57 }
+  },
+  layers: [
+    {
+      id: "culture-flow",
+      title: "Culture Flow",
+      pulse: "Ideas migrate through routes, rivers, teaching, and return.",
+      color: "#f4c95d",
+      summary:
+        "Shows how ritual practice, music, craft, language, and pilgrimage move between living places instead of staying fixed at one point.",
+      flows: [
+        { from: "jageshwar", to: "shaivism", label: "Forest ritual becomes shared sacred grammar." },
+        { from: "shaivism", to: "varanasi", label: "Devotion travels into a public ritual city." },
+        { from: "varanasi", to: "music", label: "Learning and devotion preserve sound lineages." },
+        { from: "craft", to: "ganga", label: "Trade and river movement carry cultural work." },
+        { from: "pilgrimage", to: "jageshwar", label: "Return journeys keep local memory active." }
+      ]
+    },
+    {
+      id: "language-drift",
+      title: "Language Drift",
+      pulse: "Names, chants, market speech, and oral explanation keep memory moving.",
+      color: "#7dd3fc",
+      summary:
+        "Tracks language as a living carrier of place memory, from mountain speech and Sanskrit liturgy to river-city narration.",
+      flows: [
+        { from: "kumaoni", to: "jageshwar", label: "Local speech explains sacred terrain." },
+        { from: "jageshwar", to: "pilgrimage", label: "Guides and priests transmit route knowledge." },
+        { from: "pilgrimage", to: "varanasi", label: "Pilgrims carry names, stories, and vows." },
+        { from: "varanasi", to: "music", label: "Teaching turns language into disciplined sound." }
+      ]
+    },
+    {
+      id: "ritual-routes",
+      title: "Ritual Routes",
+      pulse: "Bodies move, calendars gather, and sacred geography becomes a network.",
+      color: "#ff9f6e",
+      summary:
+        "Highlights pilgrimage, bathing, worship, festivals, and final rites as repeated movements that keep places alive.",
+      flows: [
+        { from: "ganga", to: "varanasi", label: "The river edge concentrates public devotion." },
+        { from: "varanasi", to: "pilgrimage", label: "Ritual city sends memory back through routes." },
+        { from: "pilgrimage", to: "jageshwar", label: "Mountain arrival turns travel into reverence." },
+        { from: "shaivism", to: "jageshwar", label: "Sacred identity anchors the forest valley." }
+      ]
+    },
+    {
+      id: "ecology-memory",
+      title: "Ecology Memory",
+      pulse: "Forests, water, silt, mist, and heat shape civilization before it speaks.",
+      color: "#4ad0a3",
+      summary:
+        "Treats ecology as a memory layer: deodar canopy, glacial descent, floodplain renewal, and river humidity all change human behavior.",
+      flows: [
+        { from: "deodar", to: "jageshwar", label: "Forest atmosphere prepares sacred attention." },
+        { from: "ganga", to: "floodplain", label: "Water and silt renew settlement ground." },
+        { from: "floodplain", to: "varanasi", label: "River ecology supports dense ritual city life." },
+        { from: "deodar", to: "kumaoni", label: "Mountain ecology shapes regional expression." }
+      ]
+    }
+  ]
+};
+
 export const locations = [
   {
     id: "jageshwar",

@@ -51,7 +51,8 @@ button {
 .memory-panel,
 .voice-panel,
 .orbit-readout,
-.stream-panel {
+.stream-panel,
+.dream-panel {
   border: 1px solid rgba(244, 241, 232, 0.12);
   background: var(--panel);
   backdrop-filter: blur(24px);
@@ -276,6 +277,115 @@ h2 {
   width: min(420px, 52%);
   padding: 16px;
   z-index: 2;
+}
+
+.dream-panel {
+  position: absolute;
+  top: 68px;
+  left: 0;
+  width: min(330px, 42%);
+  padding: 14px;
+  z-index: 2;
+}
+
+.dream-panel__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dream-panel__header h2 {
+  line-height: 1.25;
+}
+
+.dream-panel__header button {
+  min-width: 68px;
+  min-height: 34px;
+  color: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.055);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.dream-panel__header button[aria-pressed="true"] {
+  color: #071113;
+  border-color: var(--active-accent);
+  background: var(--active-accent);
+}
+
+#dreamSummary {
+  margin: 10px 0 12px;
+  color: rgba(245, 241, 232, 0.82);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.dream-stats {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.dream-stats span,
+.dream-stats strong {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.74rem;
+  line-height: 1.35;
+}
+
+.dream-stats span {
+  color: var(--muted);
+}
+
+.dream-stats strong {
+  color: var(--active-accent);
+  white-space: nowrap;
+}
+
+.dream-layer-list {
+  display: grid;
+  gap: 7px;
+}
+
+.dream-layer-list button {
+  min-height: 38px;
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  color: var(--ink);
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+}
+
+.dream-layer-list button:hover,
+.dream-layer-list button.is-active {
+  border-color: color-mix(in srgb, var(--dream-color), white 18%);
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.dream-layer-list span {
+  width: 8px;
+  height: 24px;
+  background: var(--dream-color);
+  box-shadow: 0 0 14px var(--dream-color);
+}
+
+.dream-layer-list strong {
+  min-width: 0;
+  font-size: 0.78rem;
 }
 
 .stream-header {
@@ -875,6 +985,10 @@ h2 {
     width: min(420px, 58%);
   }
 
+  .dream-panel {
+    width: min(320px, 40%);
+  }
+
   .layer-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -938,6 +1052,18 @@ h2 {
     top: auto;
     right: auto;
     width: 100%;
+  }
+
+  .dream-panel {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .dream-stats {
+    grid-template-columns: 1fr;
   }
 
   .stream-meta {

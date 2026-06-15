@@ -167,6 +167,15 @@ Acceptance:
 
 - The globe feels alive and shows relationships, not only points.
 
+Status: Complete.
+
+Implementation notes:
+
+- Added `earthDreaming` global network data with culture, language, ritual, and ecology layers.
+- Added an Earth Dreaming control panel with wake/sleep mode, layer switching, pulse copy, and flow counts.
+- Added animated canvas flows and moving particles between high-level civilization memory nodes.
+- Documented the model in `docs/earth-dreaming-mode.md`.
+
 ## Milestone 8: Archive Layer
 
 Goal: Preserve cultural memory as structured content.

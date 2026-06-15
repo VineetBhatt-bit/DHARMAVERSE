@@ -1,4 +1,4 @@
-import { consciousnessFacets, locations } from "./data/locations.js";
+import { consciousnessFacets, earthDreaming, locations } from "./data/locations.js";
 
 const canvas = document.querySelector("#earthCanvas");
 const ctx = canvas.getContext("2d");
@@ -28,6 +28,12 @@ const previousScene = document.querySelector("#previousScene");
 const nextScene = document.querySelector("#nextScene");
 const streamDots = document.querySelector("#streamDots");
 const streamFilters = document.querySelector("#streamFilters");
+const dreamToggle = document.querySelector("#dreamToggle");
+const dreamTitle = document.querySelector("#dreamTitle");
+const dreamSummary = document.querySelector("#dreamSummary");
+const dreamPulse = document.querySelector("#dreamPulse");
+const dreamFlowCount = document.querySelector("#dreamFlowCount");
+const dreamLayerList = document.querySelector("#dreamLayerList");
 
 let activePlace = locations[0];
 let activeSceneIndex = 0;
@@ -35,6 +41,8 @@ let activeLayerFilter = "All";
 let activeWhyFactorId = activePlace.whyHereEngine.factors[0].id;
 let activeSoundChannelId = activePlace.soundscape.channels[0].id;
 let activeThreadNodeId = activePlace.threadGraph.nodes[0].id;
+let activeDreamLayerId = earthDreaming.layers[0].id;
+let dreamModeActive = false;
 let atmospherePlaying = false;
 let atmosphereIntensity = 0.45;
 let audioContext;
@@ -334,6 +342,35 @@ function renderStreamFilters() {
   });
 }
 
+function renderDreamingMode() {
+  const activeLayer = getActiveDreamLayer();
+
+  dreamToggle.textContent = dreamModeActive ? "Sleep" : "Wake";
+  dreamToggle.setAttribute("aria-pressed", String(dreamModeActive));
+  dreamTitle.textContent = activeLayer.title;
+  dreamSummary.textContent = activeLayer.summary;
+  dreamPulse.textContent = activeLayer.pulse;
+  dreamFlowCount.textContent = `${String(activeLayer.flows.length).padStart(2, "0")} flows`;
+  dreamLayerList.innerHTML = "";
+
+  earthDreaming.layers.forEach((layer) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = layer.id === activeLayer.id ? "is-active" : "";
+    button.style.setProperty("--dream-color", layer.color);
+    button.innerHTML = `
+      <span></span>
+      <strong>${layer.title}</strong>
+    `;
+    button.addEventListener("click", () => {
+      activeDreamLayerId = layer.id;
+      dreamModeActive = true;
+      renderDreamingMode();
+    });
+    dreamLayerList.appendChild(button);
+  });
+}
+
 function renderActivePlace() {
   document.documentElement.style.setProperty("--active-tone", activePlace.tone);
   document.documentElement.style.setProperty("--active-accent", activePlace.accent);
@@ -351,6 +388,7 @@ function renderActivePlace() {
   renderThreads();
   renderWhyHereEngine();
   renderStream();
+  renderDreamingMode();
 }
 
 function selectPlace(id) {
@@ -372,6 +410,15 @@ function stepScene(direction) {
 
 function getActiveSoundChannel() {
   return activePlace.soundscape.channels.find((channel) => channel.id === activeSoundChannelId) || activePlace.soundscape.channels[0];
+}
+
+function getActiveDreamLayer() {
+  return earthDreaming.layers.find((layer) => layer.id === activeDreamLayerId) || earthDreaming.layers[0];
+}
+
+function toggleDreamingMode() {
+  dreamModeActive = !dreamModeActive;
+  renderDreamingMode();
 }
 
 function toggleAtmosphere() {
@@ -465,6 +512,7 @@ function drawGlobe(time) {
   drawSphere(centerX, centerY, radius, rotation, time);
   drawMemoryPoint(centerX, centerY, radius, activePlace, time);
   drawConnectionThreads(centerX, centerY, radius, time);
+  if (dreamModeActive) drawDreamingFlows(centerX, centerY, radius, time);
 
   requestAnimationFrame(drawGlobe);
 }
@@ -600,6 +648,68 @@ function drawConnectionThreads(centerX, centerY, radius, time) {
   ctx.restore();
 }
 
+function drawDreamingFlows(centerX, centerY, radius, time) {
+  const layer = getActiveDreamLayer();
+
+  ctx.save();
+  ctx.globalCompositeOperation = "lighter";
+  layer.flows.forEach((flow, index) => {
+    const from = earthDreaming.nodes[flow.from];
+    const to = earthDreaming.nodes[flow.to];
+    if (!from || !to) return;
+
+    const start = projectDreamNode(from, centerX, centerY, radius);
+    const end = projectDreamNode(to, centerX, centerY, radius);
+    const lift = -radius * (0.18 + (index % 3) * 0.08) + Math.sin(time * 0.001 + index) * 10;
+    const control = {
+      x: (start.x + end.x) / 2 + Math.cos(index * 1.7) * radius * 0.12,
+      y: Math.min(start.y, end.y) + lift
+    };
+    const particleT = (time * 0.00022 + index * 0.17) % 1;
+    const particle = quadraticPoint(start, control, end, particleT);
+
+    ctx.strokeStyle = hexToRgba(layer.color, 0.42);
+    ctx.lineWidth = 1.8;
+    ctx.beginPath();
+    ctx.moveTo(start.x, start.y);
+    ctx.quadraticCurveTo(control.x, control.y, end.x, end.y);
+    ctx.stroke();
+
+    ctx.fillStyle = hexToRgba(layer.color, 0.92);
+    ctx.beginPath();
+    ctx.arc(particle.x, particle.y, 3.8 + Math.sin(time * 0.006 + index) * 1.2, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  Object.values(earthDreaming.nodes).forEach((node) => {
+    const point = projectDreamNode(node, centerX, centerY, radius);
+    ctx.fillStyle = hexToRgba(layer.color, 0.24);
+    ctx.beginPath();
+    ctx.arc(point.x, point.y, 10 + Math.sin(time * 0.003 + point.x) * 2, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = "#fff8df";
+    ctx.font = "700 11px Inter, sans-serif";
+    ctx.fillText(node.label, point.x + 11, point.y + 4);
+  });
+  ctx.restore();
+}
+
+function projectDreamNode(node, centerX, centerY, radius) {
+  return {
+    x: centerX + (node.x - 0.5) * radius * 1.55,
+    y: centerY + (node.y - 0.5) * radius * 1.35
+  };
+}
+
+function quadraticPoint(start, control, end, t) {
+  const inverse = 1 - t;
+  return {
+    x: inverse * inverse * start.x + 2 * inverse * t * control.x + t * t * end.x,
+    y: inverse * inverse * start.y + 2 * inverse * t * control.y + t * t * end.y
+  };
+}
+
 function hexToRgba(hex, alpha) {
   const clean = hex.replace("#", "");
   const value = Number.parseInt(clean, 16);
@@ -616,6 +726,7 @@ function formatFacet(facet) {
 window.addEventListener("resize", resizeCanvas);
 previousScene.addEventListener("click", () => stepScene(-1));
 nextScene.addEventListener("click", () => stepScene(1));
+dreamToggle.addEventListener("click", toggleDreamingMode);
 resizeCanvas();
 renderActivePlace();
 requestAnimationFrame(drawGlobe);
