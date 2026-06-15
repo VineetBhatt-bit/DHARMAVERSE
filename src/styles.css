@@ -1130,6 +1130,63 @@ h2 {
   line-height: 1.42;
 }
 
+.draft-export {
+  margin-top: 16px;
+}
+
+.draft-packet {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.draft-packet__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.draft-packet__header span {
+  color: var(--active-accent);
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.draft-packet__header button {
+  min-height: 32px;
+  padding: 0 10px;
+  color: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.055);
+  cursor: pointer;
+  font-size: 0.74rem;
+  font-weight: 900;
+}
+
+.draft-packet__header button:hover {
+  border-color: color-mix(in srgb, var(--active-tone), white 18%);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.draft-packet pre {
+  max-height: 320px;
+  margin: 0;
+  overflow: auto;
+  padding: 10px;
+  color: rgba(245, 241, 232, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(5, 12, 13, 0.58);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.72rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 @keyframes ringPulse {
   0%,
   100% {

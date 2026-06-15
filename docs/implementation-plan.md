@@ -222,6 +222,30 @@ Implementation notes:
 - Added live draft preview for place, keeper, source, context requirements, consent status, and review rule.
 - Documented the workflow in `docs/contribution-intake.md`.
 
+## Milestone 10: Draft Export Packet
+
+Goal: Make contribution drafts portable for future review and backend workflows.
+
+Deliverables:
+
+- Structured draft packet generated from the intake console
+- Review status derived from consent path
+- Refresh control for packet regeneration
+- Documentation for packet fields
+
+Acceptance:
+
+- A curator can see a JSON draft packet that preserves place, record, and review context.
+
+Status: Complete.
+
+Implementation notes:
+
+- Added a Draft Export panel below the intake console.
+- Added generated JSON with `place`, `record`, and `review` sections.
+- Added stable draft IDs from place and title.
+- Documented the packet contract in `docs/draft-export-packet.md`.
+
 ## Working Rules
 
 - Keep each milestone small enough to review.

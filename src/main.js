@@ -20,6 +20,7 @@ const soundscapePanel = document.querySelector("#soundscapePanel");
 const threadList = document.querySelector("#threadList");
 const archiveList = document.querySelector("#archiveList");
 const contributionIntake = document.querySelector("#contributionIntake");
+const draftExport = document.querySelector("#draftExport");
 const streamTitle = document.querySelector("#streamTitle");
 const streamCounter = document.querySelector("#streamCounter");
 const streamMoment = document.querySelector("#streamMoment");
@@ -446,6 +447,25 @@ function renderContributionIntake() {
   updateContributionPreview();
 }
 
+function renderDraftExport() {
+  draftExport.innerHTML = `
+    <div class="section-label">
+      <p class="eyebrow">Draft Export</p>
+      <h2>Review packet</h2>
+    </div>
+    <article class="draft-packet">
+      <div class="draft-packet__header">
+        <span id="draftPacketStatus"></span>
+        <button type="button" id="refreshDraftPacket">Refresh</button>
+      </div>
+      <pre id="draftPacketOutput"></pre>
+    </article>
+  `;
+
+  draftExport.querySelector("#refreshDraftPacket").addEventListener("click", updateDraftExport);
+  updateDraftExport();
+}
+
 function updateContributionPreview() {
   const type = getContributionType();
   const sensitivity = getContributionSensitivity();
@@ -461,6 +481,48 @@ function updateContributionPreview() {
   contributionIntake.querySelector("#contributionPreviewSource").textContent = source;
   contributionIntake.querySelector("#contributionRequiredContext").textContent = type.requiredContext;
   contributionIntake.querySelector("#contributionReviewRule").textContent = sensitivity.review;
+  updateDraftExport();
+}
+
+function updateDraftExport() {
+  if (!draftExport.innerHTML) return;
+
+  const packet = buildContributionPacket();
+  const packetStatus = packet.review.hasConsentPath ? "Ready for curator review" : "Needs consent path";
+
+  draftExport.querySelector("#draftPacketStatus").textContent = packetStatus;
+  draftExport.querySelector("#draftPacketOutput").textContent = JSON.stringify(packet, null, 2);
+}
+
+function buildContributionPacket() {
+  const type = getContributionType();
+  const sensitivity = getContributionSensitivity();
+  const title = contributionDraft.title.trim() || "Untitled memory";
+  const keeper = contributionDraft.keeper.trim() || "Keeper not identified";
+  const source = contributionDraft.source.trim() || "Source needed";
+
+  return {
+    id: `${activePlace.id}-${slugify(title)}-draft`,
+    status: "draft",
+    place: {
+      id: activePlace.id,
+      name: activePlace.name,
+      region: activePlace.region
+    },
+    record: {
+      type: type.label,
+      title,
+      keeper,
+      source,
+      requiredContext: type.requiredContext
+    },
+    review: {
+      sensitivity: sensitivity.label,
+      reviewRule: sensitivity.review,
+      hasConsentPath: contributionDraft.hasConsentPath,
+      nextAction: contributionDraft.hasConsentPath ? "Curator review" : "Identify consent and credit path"
+    }
+  };
 }
 
 function getFilteredScenes() {
@@ -567,6 +629,7 @@ function renderActivePlace() {
   renderWhyHereEngine();
   renderArchiveLayer();
   renderContributionIntake();
+  renderDraftExport();
   renderStream();
   renderDreamingMode();
 }
@@ -924,6 +987,14 @@ function hexToRgba(hex, alpha) {
 
 function formatFacet(facet) {
   return facet.replace(/([A-Z])/g, " $1").replace(/^./, (char) => char.toUpperCase());
+}
+
+function slugify(value) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "")
+    .slice(0, 48);
 }
 
 window.addEventListener("resize", resizeCanvas);
