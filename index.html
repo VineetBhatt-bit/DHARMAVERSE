@@ -98,22 +98,23 @@
             <p class="eyebrow">Consciousness Layers</p>
             <h2 id="layerTitle">What I remember</h2>
           </div>
-          <div class="identity-grid" id="identityGrid"></div>
-          <div class="layer-list" id="layerList"></div>
-          <div class="atmosphere-list" id="atmosphereList"></div>
-          <div class="soundscape-panel" id="soundscapePanel"></div>
-          <div class="thread-list" id="threadList"></div>
-          <div class="why-here">
+          <div class="memory-tabs" id="memoryViewTabs" aria-label="Memory panel views"></div>
+          <div class="identity-grid memory-section" id="identityGrid" data-memory-view="overview"></div>
+          <div class="layer-list memory-section" id="layerList" data-memory-view="overview"></div>
+          <div class="atmosphere-list memory-section" id="atmosphereList" data-memory-view="senses"></div>
+          <div class="soundscape-panel memory-section" id="soundscapePanel" data-memory-view="senses"></div>
+          <div class="thread-list memory-section" id="threadList" data-memory-view="threads"></div>
+          <div class="why-here memory-section" data-memory-view="threads">
             <p class="eyebrow">Why here?</p>
             <h2 id="whyQuestion"></h2>
             <p id="whyHere"></p>
             <div class="why-factor-list" id="whyFactorList"></div>
             <article class="why-detail" id="whyDetail"></article>
           </div>
-          <div class="archive-list" id="archiveList"></div>
-          <div class="contribution-intake" id="contributionIntake"></div>
-          <div class="draft-export" id="draftExport"></div>
-          <div class="review-checklist" id="reviewChecklist"></div>
+          <div class="archive-list memory-section" id="archiveList" data-memory-view="archive"></div>
+          <div class="contribution-intake memory-section" id="contributionIntake" data-memory-view="archive"></div>
+          <div class="draft-export memory-section" id="draftExport" data-memory-view="archive"></div>
+          <div class="review-checklist memory-section" id="reviewChecklist" data-memory-view="archive"></div>
         </aside>
       </section>
     </main>

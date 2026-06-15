@@ -22,6 +22,7 @@ const archiveList = document.querySelector("#archiveList");
 const contributionIntake = document.querySelector("#contributionIntake");
 const draftExport = document.querySelector("#draftExport");
 const reviewChecklist = document.querySelector("#reviewChecklist");
+const memoryViewTabs = document.querySelector("#memoryViewTabs");
 const streamTitle = document.querySelector("#streamTitle");
 const streamCounter = document.querySelector("#streamCounter");
 const streamMoment = document.querySelector("#streamMoment");
@@ -46,6 +47,7 @@ let activeWhyFactorId = activePlace.whyHereEngine.factors[0].id;
 let activeSoundChannelId = activePlace.soundscape.channels[0].id;
 let activeThreadNodeId = activePlace.threadGraph.nodes[0].id;
 let activeDreamLayerId = earthDreaming.layers[0].id;
+let activeMemoryView = "overview";
 let dreamModeActive = false;
 let contributionDraft = createContributionDraft(activePlace);
 let atmospherePlaying = false;
@@ -55,6 +57,13 @@ let audioNodes = [];
 let width = 0;
 let height = 0;
 let dpr = window.devicePixelRatio || 1;
+
+const memoryViews = [
+  { id: "overview", label: "Overview" },
+  { id: "senses", label: "Senses" },
+  { id: "threads", label: "Threads" },
+  { id: "archive", label: "Archive" }
+];
 
 function resizeCanvas() {
   width = window.innerWidth;
@@ -85,6 +94,34 @@ function renderPlaces() {
     `;
     button.addEventListener("click", () => selectPlace(place.id));
     placeList.appendChild(button);
+  });
+}
+
+function renderMemoryViewTabs() {
+  memoryViewTabs.innerHTML = "";
+
+  memoryViews.forEach((view) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = view.id === activeMemoryView ? "is-active" : "";
+    button.textContent = view.label;
+    button.addEventListener("click", () => selectMemoryView(view.id));
+    memoryViewTabs.appendChild(button);
+  });
+
+  updateMemoryViewSections();
+}
+
+function selectMemoryView(viewId) {
+  activeMemoryView = viewId;
+  renderMemoryViewTabs();
+}
+
+function updateMemoryViewSections() {
+  document.querySelectorAll(".memory-section").forEach((section) => {
+    const isActive = section.dataset.memoryView === activeMemoryView;
+    section.classList.toggle("is-active", isActive);
+    section.setAttribute("aria-hidden", String(!isActive));
   });
 }
 
@@ -740,6 +777,7 @@ function renderActivePlace() {
   renderContributionIntake();
   renderDraftExport();
   renderReviewChecklist();
+  renderMemoryViewTabs();
   renderStream();
   renderDreamingMode();
 }

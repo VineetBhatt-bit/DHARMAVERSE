@@ -4,8 +4,13 @@
   --ink: #f5f1e8;
   --muted: rgba(245, 241, 232, 0.68);
   --faint: rgba(245, 241, 232, 0.12);
-  --panel: rgba(12, 20, 20, 0.72);
-  --panel-strong: rgba(15, 24, 23, 0.9);
+  --panel: rgba(11, 22, 23, 0.58);
+  --panel-strong: rgba(13, 24, 24, 0.76);
+  --glass-fill: linear-gradient(145deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.052) 42%, rgba(255, 255, 255, 0.018));
+  --glass-edge: rgba(255, 255, 255, 0.18);
+  --glass-line: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 22px 80px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  --radius: 8px;
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--ink);
   background: #091315;
@@ -28,6 +33,13 @@ body {
 
 button {
   font: inherit;
+}
+
+button,
+input,
+select,
+pre {
+  border-radius: var(--radius);
 }
 
 #earthCanvas {
@@ -53,10 +65,13 @@ button {
 .orbit-readout,
 .stream-panel,
 .dream-panel {
-  border: 1px solid rgba(244, 241, 232, 0.12);
-  background: var(--panel);
-  backdrop-filter: blur(24px);
-  box-shadow: 0 18px 70px rgba(0, 0, 0, 0.26);
+  border: 1px solid var(--glass-edge);
+  border-radius: var(--radius);
+  background:
+    var(--glass-fill),
+    var(--panel);
+  backdrop-filter: blur(28px) saturate(145%);
+  box-shadow: var(--glass-shadow);
 }
 
 .topbar {
@@ -82,6 +97,7 @@ button {
     radial-gradient(circle at 55% 52%, var(--active-tone) 0 18%, transparent 19%),
     radial-gradient(circle at 60% 58%, #183332 0 45%, #081112 46%);
   flex: 0 0 auto;
+  border-radius: var(--radius);
 }
 
 .eyebrow {
@@ -120,6 +136,7 @@ h2 {
   padding: 0 12px;
   color: var(--muted);
   border: 1px solid var(--faint);
+  border-radius: var(--radius);
   font-size: 0.86rem;
 }
 
@@ -135,19 +152,71 @@ h2 {
   height: calc(100vh - 134px);
   min-height: 520px;
   display: grid;
-  grid-template-columns: minmax(250px, 300px) minmax(340px, 1fr) minmax(280px, 360px);
-  gap: 18px;
+  grid-template-columns: minmax(240px, 290px) minmax(360px, 1fr) minmax(340px, 420px);
+  gap: 20px;
 }
 
 .place-dock,
 .memory-panel {
-  padding: 16px;
+  padding: 18px;
   align-self: stretch;
   overflow-y: auto;
 }
 
 .panel-heading {
-  margin-bottom: 14px;
+  margin-bottom: 12px;
+}
+
+.memory-tabs {
+  position: sticky;
+  top: -16px;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0 -4px 14px;
+  padding: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.035)),
+    rgba(4, 12, 13, 0.58);
+  backdrop-filter: blur(18px) saturate(145%);
+}
+
+.memory-tabs button {
+  min-height: 34px;
+  padding: 0 8px;
+  color: rgba(245, 241, 232, 0.72);
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.memory-tabs button:hover,
+.memory-tabs button.is-active {
+  color: #071113;
+  border-color: color-mix(in srgb, var(--active-accent), white 14%);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.12)),
+    var(--active-accent);
+}
+
+.memory-panel .memory-section {
+  display: none;
+}
+
+.memory-panel .memory-section.is-active {
+  display: grid;
+}
+
+.memory-panel .why-here.memory-section.is-active,
+.memory-panel .contribution-intake.memory-section.is-active,
+.memory-panel .draft-export.memory-section.is-active,
+.memory-panel .review-checklist.memory-section.is-active {
+  display: block;
 }
 
 .place-list,
@@ -166,8 +235,11 @@ h2 {
   padding: 12px;
   color: var(--ink);
   text-align: left;
-  background: rgba(255, 255, 255, 0.045);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.035)),
+    rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--glass-line);
+  border-radius: var(--radius);
   cursor: pointer;
   transition:
     background 180ms ease,
@@ -177,7 +249,9 @@ h2 {
 
 .place-card:hover,
 .place-card.is-active {
-  background: rgba(255, 255, 255, 0.09);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06)),
+    rgba(255, 255, 255, 0.055);
   border-color: color-mix(in srgb, var(--active-tone), white 18%);
   transform: translateY(-1px);
 }
@@ -187,6 +261,7 @@ h2 {
   height: 42px;
   background: var(--tone);
   box-shadow: 0 0 18px var(--tone);
+  border-radius: 999px;
 }
 
 .place-card__body {
@@ -532,6 +607,59 @@ h2 {
   background: rgba(255, 255, 255, 0.05);
   font-size: 0.8rem;
   font-weight: 800;
+}
+
+.dream-panel__header button,
+.dream-stats span,
+.dream-stats strong,
+.dream-layer-list button,
+.stream-moment,
+.stream-meta span,
+.stream-controls > button,
+.stream-filters button,
+.place-archetype,
+.identity-item,
+.atmosphere-item,
+.weather-grid article,
+.sound-detail,
+.sound-channel-list button,
+.sound-controls button,
+.thread-hub,
+.thread-node-list button,
+.thread-detail,
+.thread-relations span,
+.why-here,
+.why-factor-list button,
+.why-links span,
+.archive-item,
+.archive-meta span,
+.archive-tags span,
+.intake-form,
+.intake-preview,
+.intake-consent,
+.draft-packet,
+.draft-packet pre,
+.draft-packet__header button,
+.review-card,
+.review-item {
+  border-radius: var(--radius);
+}
+
+.identity-item,
+.atmosphere-item,
+.weather-grid article,
+.sound-detail,
+.thread-detail,
+.why-here,
+.archive-item,
+.intake-form,
+.intake-preview,
+.draft-packet,
+.review-card {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025)),
+    rgba(255, 255, 255, 0.026);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.09);
 }
 
 .identity-grid {
@@ -1264,6 +1392,36 @@ h2 {
   color: var(--muted);
   font-size: 0.76rem;
   line-height: 1.42;
+}
+
+.identity-item,
+.atmosphere-item,
+.weather-grid article,
+.sound-detail,
+.thread-detail,
+.why-here,
+.archive-item,
+.intake-form,
+.intake-preview,
+.draft-packet,
+.review-card {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025)),
+    rgba(255, 255, 255, 0.026);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.09);
+}
+
+.dream-layer-list button,
+.stream-controls > button,
+.stream-filters button,
+.sound-channel-list button,
+.sound-controls button,
+.thread-node-list button,
+.why-factor-list button,
+.draft-packet__header button {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.032)),
+    rgba(255, 255, 255, 0.024);
 }
 
 @keyframes ringPulse {

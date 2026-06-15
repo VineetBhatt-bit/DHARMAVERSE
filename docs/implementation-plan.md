@@ -294,6 +294,30 @@ Implementation notes:
 - Recorded verification commands and completed feature inventory.
 - Clarified that the current repo is a static prototype, with backend persistence and deployment as future production work.
 
+## Milestone 13: Liquid Glass UI Refinement
+
+Goal: Make the prototype feel cleaner, less congested, and more modern.
+
+Deliverables:
+
+- Tabbed memory panel sections
+- Softer liquid-glass panel treatment
+- Smoother control and text-box corners
+- Less crowded right-side information architecture
+
+Acceptance:
+
+- A user can test the app without the memory panel feeling overloaded, and controls read as polished glass surfaces.
+
+Status: Complete.
+
+Implementation notes:
+
+- Added Overview, Senses, Threads, and Archive tabs for the memory panel.
+- Hid inactive memory sections to reduce visual overload.
+- Updated glass surfaces with blur, saturation, inset highlights, smoother 8px corners, and softer inner panels.
+- Slightly widened the right-side panel on desktop for better readability.
+
 ## Working Rules
 
 - Keep each milestone small enough to review.
