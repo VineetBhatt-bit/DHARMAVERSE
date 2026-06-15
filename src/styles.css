@@ -614,22 +614,99 @@ h2 {
   accent-color: var(--active-accent);
 }
 
-.thread-chips {
+.thread-graph {
+  display: grid;
+  gap: 10px;
+}
+
+.thread-hub {
+  min-height: 44px;
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  color: var(--active-accent);
+  border: 1px solid color-mix(in srgb, var(--active-tone), white 16%);
+  background:
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.07), transparent),
+    rgba(255, 255, 255, 0.045);
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.thread-node-list {
+  display: grid;
   gap: 8px;
 }
 
-.thread-chips span {
-  min-height: 30px;
-  display: inline-flex;
-  align-items: center;
-  padding: 0 10px;
-  color: rgba(245, 241, 232, 0.86);
-  border: 1px solid rgba(255, 255, 255, 0.11);
+.thread-node-list button {
+  min-height: 58px;
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+  color: var(--ink);
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06), transparent 48%),
+    rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+}
+
+.thread-node-list button:hover,
+.thread-node-list button.is-active {
+  border-color: color-mix(in srgb, var(--active-tone), white 18%);
+  background: rgba(255, 255, 255, 0.085);
+}
+
+.thread-node-list strong {
+  font-size: 0.88rem;
+}
+
+.thread-node-list span {
+  color: var(--active-accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.thread-detail {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(255, 255, 255, 0.045);
-  font-size: 0.78rem;
-  font-weight: 700;
+}
+
+.thread-detail > span {
+  color: var(--active-accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.thread-detail strong {
+  font-size: 1rem;
+}
+
+.thread-detail p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.48;
+}
+
+.thread-relations {
+  display: grid;
+  gap: 7px;
+}
+
+.thread-relations span {
+  padding: 8px;
+  color: rgba(245, 241, 232, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.035);
+  font-size: 0.76rem;
+  line-height: 1.4;
 }
 
 .why-here {

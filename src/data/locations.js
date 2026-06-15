@@ -131,6 +131,47 @@ export const locations = [
       "Pilgrimage networks",
       "Local oral traditions"
     ],
+    threadGraph: {
+      center: "Jageshwar",
+      nodes: [
+        {
+          id: "deodar-forests",
+          label: "Deodar forests",
+          type: "Ecology",
+          summary: "The forest creates the sacred threshold, atmospheric silence, and ecological identity around the temples."
+        },
+        {
+          id: "kumaoni-language",
+          label: "Kumaoni language",
+          type: "Language",
+          summary: "Local speech, place names, and oral explanation keep Jageshwar rooted in regional memory."
+        },
+        {
+          id: "shaivism",
+          label: "Shaivism",
+          type: "Religion",
+          summary: "Shaiva devotion gives the valley its ritual frame and explains why stone, bells, and pilgrimage gather here."
+        },
+        {
+          id: "temple-architecture",
+          label: "Temple architecture",
+          type: "Architecture",
+          summary: "Stone shrines make devotion durable and turn the valley into a clustered sacred field."
+        },
+        {
+          id: "pilgrimage-networks",
+          label: "Pilgrimage networks",
+          type: "Route",
+          summary: "Repeated movement by pilgrims keeps the place alive beyond any single period of history."
+        }
+      ],
+      links: [
+        { from: "deodar-forests", to: "shaivism", relation: "Sacred ecology supports ritual presence." },
+        { from: "shaivism", to: "temple-architecture", relation: "Belief becomes stone form and daily worship." },
+        { from: "kumaoni-language", to: "pilgrimage-networks", relation: "Local explanation helps transmit routes and reverence." },
+        { from: "pilgrimage-networks", to: "temple-architecture", relation: "Return visits keep the shrine cluster active." }
+      ]
+    },
     whyHere:
       "Mountains created enclosure, forests created sanctity, stone architecture fixed devotion in place, and pilgrimage kept the valley emotionally alive.",
     whyHereEngine: {
@@ -301,6 +342,47 @@ export const locations = [
       ]
     },
     threads: ["Glaciers", "Floodplain agriculture", "Pilgrimage cities", "River trade", "Ritual calendars", "Oral songs"],
+    threadGraph: {
+      center: "Ganga",
+      nodes: [
+        {
+          id: "glaciers",
+          label: "Glaciers",
+          type: "Geography",
+          summary: "Glacial origins make the river a descent from mountain memory into plains and cities."
+        },
+        {
+          id: "floodplain-agriculture",
+          label: "Floodplain agriculture",
+          type: "Ecology",
+          summary: "Silt, flood, and soil renewal make settlement and food systems possible."
+        },
+        {
+          id: "pilgrimage-cities",
+          label: "Pilgrimage cities",
+          type: "Religion",
+          summary: "Sacred riverfronts concentrate ritual, mourning, bathing, and public devotion."
+        },
+        {
+          id: "river-trade",
+          label: "River trade",
+          type: "Route",
+          summary: "Boats, crossings, markets, and river corridors move goods and ideas."
+        },
+        {
+          id: "oral-songs",
+          label: "Oral songs",
+          type: "Culture",
+          summary: "Songs and family rites make the river audible across regions and generations."
+        }
+      ],
+      links: [
+        { from: "glaciers", to: "floodplain-agriculture", relation: "Mountain water renews the plains." },
+        { from: "floodplain-agriculture", to: "river-trade", relation: "Agrarian settlement creates movement and exchange." },
+        { from: "pilgrimage-cities", to: "oral-songs", relation: "Ritual gathering carries sound and story." },
+        { from: "river-trade", to: "pilgrimage-cities", relation: "Routes connect sacred river cities." }
+      ]
+    },
     whyHere:
       "The river made settlement possible, connected regions, renewed soil, shaped ritual life, and turned movement into civilization.",
     whyHereEngine: {
@@ -461,6 +543,47 @@ export const locations = [
       ]
     },
     threads: ["Ganga", "Classical music", "Textile craft", "Sanskrit learning", "Pilgrimage routes", "Ritual fire"],
+    threadGraph: {
+      center: "Varanasi",
+      nodes: [
+        {
+          id: "ganga",
+          label: "Ganga",
+          type: "River",
+          summary: "The river edge gives Varanasi its ritual stage, visual identity, and daily rhythm."
+        },
+        {
+          id: "classical-music",
+          label: "Classical music",
+          type: "Sound",
+          summary: "Music lineages preserve emotion, discipline, and devotional atmosphere."
+        },
+        {
+          id: "textile-craft",
+          label: "Textile craft",
+          type: "Culture",
+          summary: "Craft memory carries domestic labor, trade, artistry, and urban livelihood."
+        },
+        {
+          id: "sanskrit-learning",
+          label: "Sanskrit learning",
+          type: "Language",
+          summary: "Study and teaching traditions anchor the city beyond political change."
+        },
+        {
+          id: "ritual-fire",
+          label: "Ritual fire",
+          type: "Religion",
+          summary: "Fire and water make mortality part of the city's public spiritual memory."
+        }
+      ],
+      links: [
+        { from: "ganga", to: "ritual-fire", relation: "The riverfront holds final rites and sacred transition." },
+        { from: "sanskrit-learning", to: "ritual-fire", relation: "Text, ritual knowledge, and practice sustain ceremony." },
+        { from: "classical-music", to: "sanskrit-learning", relation: "Learning cultures preserve sound, language, and devotion." },
+        { from: "textile-craft", to: "ganga", relation: "Trade and river access keep craft economies connected." }
+      ]
+    },
     whyHere:
       "A river bend, ritual geography, learning traditions, trade movement, and human longing made the city endure.",
     whyHereEngine: {

@@ -145,6 +145,14 @@ Acceptance:
 
 - A user can see how one place connects to ecology, religion, language, architecture, and routes.
 
+Status: Complete.
+
+Implementation notes:
+
+- Added `threadGraph` node and link data for each sample location.
+- Replaced static thread chips with an interactive connection graph.
+- Added graph node detail and relation summaries.
+
 ## Milestone 7: Earth Dreaming Mode
 
 Goal: Create an experimental global exploration mode.

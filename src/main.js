@@ -34,6 +34,7 @@ let activeSceneIndex = 0;
 let activeLayerFilter = "All";
 let activeWhyFactorId = activePlace.whyHereEngine.factors[0].id;
 let activeSoundChannelId = activePlace.soundscape.channels[0].id;
+let activeThreadNodeId = activePlace.threadGraph.nodes[0].id;
 let atmospherePlaying = false;
 let atmosphereIntensity = 0.45;
 let audioContext;
@@ -180,19 +181,50 @@ function renderSoundscape() {
 }
 
 function renderThreads() {
+  const graph = activePlace.threadGraph;
+  const activeNode = graph.nodes.find((node) => node.id === activeThreadNodeId) || graph.nodes[0];
+  const activeLinks = graph.links.filter((link) => link.from === activeNode.id || link.to === activeNode.id);
+
   threadList.innerHTML = `
     <div class="section-label">
       <p class="eyebrow">Civilization Threads</p>
-      <h2>What I connect to</h2>
+      <h2>Connection graph</h2>
     </div>
-    <div class="thread-chips"></div>
+    <div class="thread-graph">
+      <div class="thread-hub">${graph.center}</div>
+      <div class="thread-node-list"></div>
+    </div>
+    <article class="thread-detail">
+      <span>${activeNode.type}</span>
+      <strong>${activeNode.label}</strong>
+      <p>${activeNode.summary}</p>
+      <div class="thread-relations"></div>
+    </article>
   `;
 
-  const chips = threadList.querySelector(".thread-chips");
-  activePlace.threads.forEach((thread) => {
-    const chip = document.createElement("span");
-    chip.textContent = thread;
-    chips.appendChild(chip);
+  const nodeList = threadList.querySelector(".thread-node-list");
+  graph.nodes.forEach((node) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = node.id === activeNode.id ? "is-active" : "";
+    button.innerHTML = `
+      <strong>${node.label}</strong>
+      <span>${node.type}</span>
+    `;
+    button.addEventListener("click", () => {
+      activeThreadNodeId = node.id;
+      renderThreads();
+    });
+    nodeList.appendChild(button);
+  });
+
+  const relations = threadList.querySelector(".thread-relations");
+  activeLinks.forEach((link) => {
+    const otherNodeId = link.from === activeNode.id ? link.to : link.from;
+    const otherNode = graph.nodes.find((node) => node.id === otherNodeId);
+    const item = document.createElement("span");
+    item.textContent = `${otherNode?.label || graph.center}: ${link.relation}`;
+    relations.appendChild(item);
   });
 }
 
@@ -327,6 +359,7 @@ function selectPlace(id) {
   activeLayerFilter = "All";
   activeWhyFactorId = activePlace.whyHereEngine.factors[0].id;
   activeSoundChannelId = activePlace.soundscape.channels[0].id;
+  activeThreadNodeId = activePlace.threadGraph.nodes[0].id;
   if (atmospherePlaying) restartAtmosphere();
   renderActivePlace();
 }
