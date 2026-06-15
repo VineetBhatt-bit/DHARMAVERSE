@@ -1,4 +1,4 @@
-import { consciousnessFacets, earthDreaming, locations } from "./data/locations.js";
+import { archiveRecords, consciousnessFacets, earthDreaming, locations } from "./data/locations.js";
 
 const canvas = document.querySelector("#earthCanvas");
 const ctx = canvas.getContext("2d");
@@ -18,6 +18,7 @@ const identityGrid = document.querySelector("#identityGrid");
 const atmosphereList = document.querySelector("#atmosphereList");
 const soundscapePanel = document.querySelector("#soundscapePanel");
 const threadList = document.querySelector("#threadList");
+const archiveList = document.querySelector("#archiveList");
 const streamTitle = document.querySelector("#streamTitle");
 const streamCounter = document.querySelector("#streamCounter");
 const streamMoment = document.querySelector("#streamMoment");
@@ -285,6 +286,55 @@ function renderWhyHereEngine() {
   `;
 }
 
+function renderArchiveLayer() {
+  const records = archiveRecords.filter((record) => record.placeId === activePlace.id);
+
+  archiveList.innerHTML = `
+    <div class="section-label">
+      <p class="eyebrow">Archive Layer</p>
+      <h2>Cultural memory records</h2>
+    </div>
+  `;
+
+  records.forEach((record) => {
+    const item = document.createElement("article");
+    item.className = "archive-item";
+    item.innerHTML = `
+      <div class="archive-item__header">
+        <span>${record.type}</span>
+        <strong>${record.title}</strong>
+      </div>
+      <p>${record.context}</p>
+      <dl>
+        <div>
+          <dt>Keeper</dt>
+          <dd>${record.keeper}</dd>
+        </div>
+        <div>
+          <dt>Provenance</dt>
+          <dd>${record.provenance}</dd>
+        </div>
+        <div>
+          <dt>Source</dt>
+          <dd>${record.source}</dd>
+        </div>
+        <div>
+          <dt>Rights</dt>
+          <dd>${record.rights}</dd>
+        </div>
+      </dl>
+      <div class="archive-meta">
+        <span>${record.confidence}</span>
+        ${record.facets.map((facet) => `<span>${formatFacet(facet)}</span>`).join("")}
+      </div>
+      <div class="archive-tags">
+        ${record.tags.map((tag) => `<span>${tag}</span>`).join("")}
+      </div>
+    `;
+    archiveList.appendChild(item);
+  });
+}
+
 function getFilteredScenes() {
   if (activeLayerFilter === "All") return activePlace.memoryStream;
   return activePlace.memoryStream.filter((scene) => scene.layer === activeLayerFilter);
@@ -387,6 +437,7 @@ function renderActivePlace() {
   renderSoundscape();
   renderThreads();
   renderWhyHereEngine();
+  renderArchiveLayer();
   renderStream();
   renderDreamingMode();
 }

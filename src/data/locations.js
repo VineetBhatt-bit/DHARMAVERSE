@@ -87,6 +87,99 @@ export const earthDreaming = {
   ]
 };
 
+export const archiveRecords = [
+  {
+    id: "jageshwar-deodar-oral-memory",
+    placeId: "jageshwar",
+    type: "Oral tradition",
+    title: "Deodar forest as sacred threshold",
+    keeper: "Temple guides and local families",
+    provenance: "Community memory recorded as a living interpretation, not a fixed historical claim.",
+    source: "Field interview placeholder",
+    context:
+      "Explains why the forest is treated as part of the sacred arrival sequence before a visitor reaches the stone shrines.",
+    rights: "Requires community consent before public reuse.",
+    confidence: "Interpretive",
+    facets: ["ecology", "religion", "oralTraditions"],
+    tags: ["deodar", "arrival", "sacred ecology"]
+  },
+  {
+    id: "jageshwar-bell-sound-memory",
+    placeId: "jageshwar",
+    type: "Sound memory",
+    title: "Bell metal through cold morning air",
+    keeper: "Priests, pilgrims, and caretakers",
+    provenance: "Atmospheric observation linked to ritual sound and daily worship.",
+    source: "On-site ambience placeholder",
+    context:
+      "Captures how recurring sound marks the valley as active and changes the emotional perception of the forest.",
+    rights: "Recordings should identify performer, place, and consent status.",
+    confidence: "Observed",
+    facets: ["religion", "festivals", "ecology"],
+    tags: ["bells", "dawn", "ritual sound"]
+  },
+  {
+    id: "ganga-floodplain-song",
+    placeId: "ganga",
+    type: "Song or chant",
+    title: "Floodplain renewal song fragment",
+    keeper: "Riverbank farming communities",
+    provenance: "Placeholder for seasonal songs tied to flood, silt, crops, and river return.",
+    source: "Community archive placeholder",
+    context:
+      "Connects ecological change to cultural expression so flood is remembered as both risk and renewal.",
+    rights: "Needs performer credit, recording permission, and language attribution.",
+    confidence: "Needs source",
+    facets: ["ecology", "culture", "oralTraditions"],
+    tags: ["floodplain", "silt", "seasonal song"]
+  },
+  {
+    id: "ganga-boatman-route-knowledge",
+    placeId: "ganga",
+    type: "Local knowledge",
+    title: "Boat crossing and current knowledge",
+    keeper: "Boatmen and river workers",
+    provenance: "Practical knowledge transmitted through work, weather, and river change.",
+    source: "Route interview placeholder",
+    context:
+      "Preserves knowledge of currents, crossings, seasonal hazards, and riverbank change as living infrastructure.",
+    rights: "Credit knowledge holders and avoid exposing sensitive livelihood details without consent.",
+    confidence: "Interpretive",
+    facets: ["tradeRoutes", "geography", "climate"],
+    tags: ["boats", "current", "crossing"]
+  },
+  {
+    id: "varanasi-music-lineage-note",
+    placeId: "varanasi",
+    type: "Music lineage",
+    title: "Morning raga practice near the river",
+    keeper: "Musicians, students, and teaching households",
+    provenance: "Placeholder for lineage notes connecting practice, place, time, and teacher memory.",
+    source: "Lineage documentation placeholder",
+    context:
+      "Links sound inheritance to dawn, river atmosphere, teaching discipline, and devotional urban memory.",
+    rights: "Requires artist credit and lineage-sensitive reuse terms.",
+    confidence: "Needs source",
+    facets: ["culture", "language", "religion"],
+    tags: ["raga", "dawn", "teaching"]
+  },
+  {
+    id: "varanasi-ghat-rite-provenance",
+    placeId: "varanasi",
+    type: "Ritual note",
+    title: "Ghat rite context record",
+    keeper: "Priests, families, and ritual specialists",
+    provenance: "Context record for where, when, why, and by whom a ritual memory is documented.",
+    source: "Ritual documentation placeholder",
+    context:
+      "Keeps a ritual memory useful by preserving location, season, participants, consent, and interpretive boundaries.",
+    rights: "Sensitive rites require strict consent, privacy review, and non-extractive handling.",
+    confidence: "Protocol",
+    facets: ["religion", "architecture", "oralTraditions"],
+    tags: ["ghat", "rite", "provenance"]
+  }
+];
+
 export const locations = [
   {
     id: "jageshwar",

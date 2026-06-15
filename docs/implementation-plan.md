@@ -190,6 +190,15 @@ Acceptance:
 
 - Cultural knowledge can be stored with enough context to remain useful in the future.
 
+Status: Complete.
+
+Implementation notes:
+
+- Added `archiveRecords` with cultural memory, oral tradition, sound, local knowledge, ritual, and music examples.
+- Added keeper, provenance, source, context, rights, confidence, facet, and tag fields.
+- Rendered archive records inside the active place memory panel.
+- Documented the schema and contribution workflow in `docs/archive-layer.md`.
+
 ## Working Rules
 
 - Keep each milestone small enough to review.
